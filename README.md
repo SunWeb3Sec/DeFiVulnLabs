@@ -1,5 +1,5 @@
 # DeFiVulnLabs
-This was an internal Web3 solidity security training in XREX. I want to share these materials with everyone interested in Web3 security and how to find vulnerabilities in code and exploit them. Every vulnerability testing uses Foundry. Faster and easier!
+This was an internal Web3 solidity security training in [XREX](https://xrex.io/). I want to share these materials with everyone interested in Web3 security and how to find vulnerabilities in code and exploit them. Every vulnerability testing uses Foundry. Faster and easier!
 
 A collection of vulnerable code snippets taken from [Solidity by Example](https://solidity-by-example.org/), [SWC Registry](https://swcregistry.io/) and [Blockchain CTF](https://github.com/blockthreat/blocksec-ctfs), etc.  
 ##### Education only! Please do not use it in production.
