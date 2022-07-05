@@ -41,6 +41,8 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
   * Insecure visibility settings give attackers straightforward ways to access a contract's private values or logic.
 * [txorigin - phishing](src/test/txorigin.sol) : 
   * tx.origin is a global variable in Solidity which returns the address of the account that sent the transaction. Using the variable for authorization could make a contract vulnerable if an authorized account calls into a malicious contract. 
+* [Uninitialized state variables](src/test/Uninitialized_variables.sol) : 
+  * Uninitialized local storage variables may contain the value of other storage variables in the contract; this fact can cause unintentional vulnerabilities, or be exploited deliberately.
 * [Approve - Scam](src/test/ApproveScam.sol) : 
   * Too many scams abusing approve or setApprovalForAll to drain your tokens.
 
