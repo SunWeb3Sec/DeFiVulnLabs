@@ -17,19 +17,19 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
 * [Selfdestruct 1](src/test/Selfdestruct.sol) | [Selfdestruct 2](src/test/Selfdestruct2.sol) : 
   * Due to missing or insufficient access controls, malicious parties can self-destruct the contract.
   * The selfdestruct(address) function removes all bytecode from the contract address and sends all ether stored to the specified address.
-* [Unsafe Delegatecall](src/test/Delegatecall.sol): 
+* [Unsafe Delegatecall](src/test/Delegatecall.sol) : 
   * This allows a smart contract to dynamically load code from a different address at runtime.
-* [Reentrancy](src/test/Reentrancy.sol): 
+* [Reentrancy](src/test/Reentrancy.sol) : 
   * One of the major dangers of calling external contracts is that they can take over the control flow. 
   * Not following [checks-effects-interactions](https://fravoll.github.io/solidity-patterns/checks_effects_interactions.html) pattern and no ReentrancyGuard. 
 * [Unsafe low level call - call injection](src/test/UnsafeCall.sol) : 
   * Use of low level "call" should be avoided whenever possible. It can lead to unexpected behavior if return value is not handled properly. 
-* [Privatedata](src/test/Privatedata.sol): 
+* [Privatedata](src/test/Privatedata.sol) : 
   * Private data ≠ Secure. It's readable from slots of the contract.
   * it's important that unencrypted private data is not stored in the contract code or state.
 * [Unprotected callback - NFT over mint](src/test/Unprotected-callback.sol) : 
   * _safeMint is secure? Attacker can reenter the mint function inside the onERC721Received callback.
-* [Backdoor assembly](src/test/Backdoor-assembly.sol): 
+* [Backdoor assembly](src/test/Backdoor-assembly.sol) : 
   * Malicious attacker can inject inline assembly to manipulate conditions. Change implementation contract or sensitive parameters.
 * [Bypass iscontract](src/test/Bypasscontract.sol) : 
   * During contract creation when the constructor is executed there is no code yet so the code size will be 0.
@@ -39,6 +39,7 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
   * Use of global variables like block hash, block number, block timestamp and other fields is insecure, miner and attacker can control it.
 * [Visibility](src/test/Visibility.sol) : 
   * Insecure visibility settings give attackers straightforward ways to access a contract's private values or logic.
+  * Real case : [FlippazOne NFT](https://github.com/SunWeb3Sec/DeFiHackLabs#20220706-flippazone-nft----accesscontrol)
 * [txorigin - phishing](src/test/txorigin.sol) : 
   * tx.origin is a global variable in Solidity which returns the address of the account that sent the transaction. Using the variable for authorization could make a contract vulnerable if an authorized account calls into a malicious contract. 
 * [Uninitialized state variables](src/test/Uninitialized_variables.sol) : 
