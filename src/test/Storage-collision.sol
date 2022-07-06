@@ -14,7 +14,7 @@ function testStorageCollision() public {
 
     console.log("Current implementation contract address:",ProxyContract.implementation());
     ProxyContract.testcollision();
-    console.log("overwrited slot0 implementation contract address:",ProxyContract.implementation());
+    console.log("Overwrited slot0 implementation contract address:",ProxyContract.implementation());
     console.log("Exploit completed");
     }
     receive() payable external{}
