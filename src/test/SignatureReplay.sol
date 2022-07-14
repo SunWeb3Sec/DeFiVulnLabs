@@ -5,7 +5,6 @@ import "forge-std/Test.sol";
 
 contract ContractTest is Test {
         TokenWhale TokenWhaleContract;
- 
 
 function testSignatureReplay() public {
     address alice = vm.addr(1);
