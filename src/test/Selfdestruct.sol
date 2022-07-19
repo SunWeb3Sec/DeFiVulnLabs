@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.13;
+pragma solidity ^0.8.15;
 
 import "forge-std/Test.sol";
 
@@ -36,7 +36,7 @@ function testselfdestruct() public {
 
     console.log("Balance of EtherGameContract:", address(EtherGameContract).balance);
     console.log("Exploit completed, Game is over");
-    EtherGameContract.deposit{value: 1 ether}();
+    EtherGameContract.deposit{value: 1 ether}(); //This call will fial due to contract destroyd.
     }
     receive() payable external{}
 }

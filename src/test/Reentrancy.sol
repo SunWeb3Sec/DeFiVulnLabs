@@ -21,14 +21,13 @@ function setUp() public {
     }
 
 function testReentrancy() public {
-        attack.Attack() ;
+        attack.Attack() ;  //exploit here
  
     }
 
 function testRemediated() public {
         attackRemediated.Attack() ;
- 
-    }
+     }
 }
 
 contract EtherStore {

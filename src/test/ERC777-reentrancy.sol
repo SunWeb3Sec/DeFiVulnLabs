@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.15;
 
 import "forge-std/Test.sol";
 import "@openzeppelin/contracts/token/ERC777/ERC777.sol";
@@ -21,12 +21,12 @@ contract ContractTest is Test {
     )
 );
 
-        // Register
+        // Register IERC1820Registry
         IERC1820Registry registry = IERC1820Registry(
             address(0x1820a4B7618BdE71Dce8cdc73aAB6C95905faD24)
         );
 
-        // tokensReceived Hook
+        //tokensReceived Hook
         //The token contract MUST call the tokensReceived hook of the recipient if the recipient registers an ERC777TokensRecipient implementation via ERC-1820.
         registry.setInterfaceImplementer(
             address(this),

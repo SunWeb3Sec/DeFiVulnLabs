@@ -1,11 +1,13 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.13;
+pragma solidity ^0.8.15;
 
 import "forge-std/Test.sol";
-//Lottery game
-//Refers to JST contract backdoor. many rugged style's contract has similar pattern.
-//Looks like theres is no setwinner function in contract, how admin can rug?
- 
+/* 
+Lottery game: anyone can call pickWinner to get prize if you are lucky. 
+Refers to JST contract backdoor. many rugged style's contract has similar pattern.
+Looks like theres is no setwinner function in contract, how admin can rug?
+*/
+
 contract ContractTest is Test {
         LotteryGame LotteryGameContract;
 

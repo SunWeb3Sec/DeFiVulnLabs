@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.15;
 
 import "forge-std/Test.sol";
 
@@ -83,7 +83,7 @@ contract TokenWhale {
         allowance[msg.sender][_spender] = _value; 
  
         //Call the contract code
-        _spender.call(_extraData); 
+        _spender.call(_extraData);  //vulnerable point
        // return true;
     }
 }

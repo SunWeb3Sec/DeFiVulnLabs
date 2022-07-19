@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.15;
 
 import "forge-std/Test.sol";
 
@@ -24,7 +24,7 @@ function testOverflow() public {
     vm.deal(address(bob), 1 ether); 
    //vm.startPrank(alice);    
     ArrayContract = new Array();   
-    ArrayContract.updaterewardDebt(100);
+    ArrayContract.updaterewardDebt(100); // update rewardDebt to 100
     (uint amount, uint rewardDebt)= ArrayContract.userInfo(address(this));
     console.log("Non-updated rewardDebt",rewardDebt );
 
