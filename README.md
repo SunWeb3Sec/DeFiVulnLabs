@@ -26,7 +26,7 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
   * ERC777 tokens allow arbitrary callbacks via hooks that are called during token transfers. Malicious contract addresses may cause reentrancy on such callbacks if reentrancy guards are not used. [REF1](https://medium.com/cream-finance/c-r-e-a-m-finance-post-mortem-amp-exploit-6ceb20a630c5), [REF2](https://quantstamp.com/blog/how-the-dforce-hacker-used-reentrancy-to-steal-25-million), [Cream POC](https://github.com/SunWeb3Sec/DeFiHackLabs#20210830-cream-finance---flashloan-attack--reentrancy)
 * [Unsafe low level call - call injection](src/test/UnsafeCall.sol) : 
   * Use of low level "call" should be avoided whenever possible. It can lead to unexpected behavior if return value is not handled properly. 
-* [Privatedata](src/test/Privatedata.sol) : 
+* [Private data](src/test/Privatedata.sol) : 
   * Private data ≠ Secure. It's readable from slots of the contract.
   * it's important that unencrypted private data is not stored in the contract code or state.
 * [Unprotected callback - NFT over mint](src/test/Unprotected-callback.sol) : 
@@ -48,7 +48,7 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
   * Uninitialized local storage variables may contain the value of other storage variables in the contract; this fact can cause unintentional vulnerabilities, or be exploited deliberately.
 * [Storage collision](src/test/Storage-collision.sol) : 
   * If variable’s storage location is fixed and it happens that there is another variable that has the same index/offset of the storage location in the implementation contract, then there will be a storage collision. [REF](https://blog.openzeppelin.com/proxy-patterns/)
-* [Approve - Scam](src/test/ApproveScam.sol) : 
+* [Approval scam](src/test/ApproveScam.sol) : 
   * Too many scams abusing approve or setApprovalForAll to drain your tokens.
 * [Signature replay](src/test/SignatureReplay.sol) : 
   * Missing protection against signature replay attacks, Same signature can be used multiple times to execute a function. [REF1](https://medium.com/cryptronics/signature-replay-vulnerabilities-in-smart-contracts-3b6f7596df57), [REF2](https://coinsbench.com/signature-replay-hack-solidity-13-735997ad02e5), [REF3](https://medium.com/cypher-core/replay-attack-vulnerability-in-ethereum-smart-contracts-introduced-by-transferproxy-124bf3694e25), [REF4](https://media.defcon.org/DEF%20CON%2026/DEF%20CON%2026%20presentations/DEFCON-26-Bai-Zheng-Chai-Wang-You-May-Have-Paid-more-than-You-Imagine.pdf)
