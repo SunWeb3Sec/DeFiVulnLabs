@@ -41,7 +41,7 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
   * Use of global variables like block hash, block number, block timestamp and other fields is insecure, miner and attacker can control it.
 * [Visibility](src/test/Visibility.sol) : 
   * Insecure visibility settings give attackers straightforward ways to access a contract's private values or logic.
-  * Real case : [FlippazOne NFT](https://github.com/SunWeb3Sec/DeFiHackLabs#20220706-flippazone-nft----accesscontrol)
+  * Real case : [FlippazOne NFT](https://github.com/SunWeb3Sec/DeFiHackLabs#20220706-flippazone-nft----accesscontrol) | [88mph NFT](https://github.com/SunWeb3Sec/DeFiHackLabs#20210607-88mph-nft---access-control)
 * [txorigin - phishing](src/test/txorigin.sol) : 
   * tx.origin is a global variable in Solidity which returns the address of the account that sent the transaction. Using the variable for authorization could make a contract vulnerable if an authorized account calls into a malicious contract. 
 * [Uninitialized state variables](src/test/Uninitialized_variables.sol) : 
