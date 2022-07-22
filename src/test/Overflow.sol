@@ -31,7 +31,7 @@ contract TimeLock {
     }
 
     function increaseLockTime(uint _secondsToIncrease) public {
-        lockTime[msg.sender] += _secondsToIncrease;
+        lockTime[msg.sender] += _secondsToIncrease; // vulnerable
     }
 
     function withdraw() public {
