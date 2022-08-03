@@ -54,6 +54,8 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
   * Missing protection against signature replay attacks, Same signature can be used multiple times to execute a function. [REF1](https://medium.com/cryptronics/signature-replay-vulnerabilities-in-smart-contracts-3b6f7596df57), [REF2](https://coinsbench.com/signature-replay-hack-solidity-13-735997ad02e5), [REF3](https://medium.com/cypher-core/replay-attack-vulnerability-in-ethereum-smart-contracts-introduced-by-transferproxy-124bf3694e25), [REF4](https://media.defcon.org/DEF%20CON%2026/DEF%20CON%2026%20presentations/DEFCON-26-Bai-Zheng-Chai-Wang-You-May-Have-Paid-more-than-You-Imagine.pdf)
 * [Data location - storage vs memory](src/test/DataLocation.sol) : 
   * Misuse of storage and memory references to get unexpected value. [REF1](https://mudit.blog/cover-protocol-hack-analysis-tokens-minted-exploit/), [REF2](https://www.educative.io/answers/storage-vs-memory-in-solidity)
+* [DirtyBytes](src/test/Dirtybytes.sol) : 
+  * Copying ``bytes`` arrays from memory or calldata to storage may result in dirty storage values.
   
 ## Link reference
 
