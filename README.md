@@ -7,7 +7,7 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
 ## Getting Started
 
 * Follow the [instructions](https://book.getfoundry.sh/getting-started/installation.html) to install [Foundry](https://github.com/foundry-rs/foundry).
-* Clone and run command:```git submodule update --init --recursive ## initialize submodule dependencies```
+* Clone and install dependencies:```git submodule update --init --recursive```
 * Test vulnerability: ```forge test --contracts ./src/test/Reentrancy.sol -vvvv``` 
 
 ## List of vulnerabilities
