@@ -25,35 +25,35 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
 * [ERC777 callbacks and reentrancy](src/test/ERC777-reentrancy.sol) : 
   * ERC777 tokens allow arbitrary callbacks via hooks that are called during token transfers. Malicious contract addresses may cause reentrancy on such callbacks if reentrancy guards are not used. [REF1](https://medium.com/cream-finance/c-r-e-a-m-finance-post-mortem-amp-exploit-6ceb20a630c5), [REF2](https://quantstamp.com/blog/how-the-dforce-hacker-used-reentrancy-to-steal-25-million), [Cream POC](https://github.com/SunWeb3Sec/DeFiHackLabs#20210830-cream-finance---flashloan-attack--reentrancy)
 * [Unsafe low level call - call injection](src/test/UnsafeCall.sol) : 
-  * Use of low level "call" should be avoided whenever possible. It can lead to unexpected behavior if return value is not handled properly. 
+  * Use of low level "call" should be avoided whenever possible. If the call value is controllable, it is easy to cause arbitrary function execution.
 * [Private data](src/test/Privatedata.sol) : 
   * Private data ≠ Secure. It's readable from slots of the contract.
-  * it's important that unencrypted private data is not stored in the contract code or state.
+  * Because the storage of each smart contract is public and transparent, and the content can be read through the corresponding slot in the specified contract address. Sensitive information is not recommended to be placed in smart contract programs.
 * [Unprotected callback - NFT over mint](src/test/Unprotected-callback.sol) : 
   * _safeMint is secure? Attacker can reenter the mint function inside the onERC721Received callback.
 * [Backdoor assembly](src/test/Backdoor-assembly.sol) : 
-  * Malicious attacker can inject inline assembly to manipulate conditions. Change implementation contract or sensitive parameters.
+  * An attacker can manipulate smart contracts as a backdoor by writing inline assembly. Any sensitive parameters can be changed at any time.
 * [Bypass iscontract](src/test/Bypasscontract.sol) : 
-  * During contract creation when the constructor is executed there is no code yet so the code size will be 0.
+  * The attacker only needs to write the code in the constructor of the smart contract to bypass the detection mechanism of whether it is a smart contract.
 * [DOS](src/test/DOS.sol) : 
-  * External calls can fail accidentally or deliberately, which can cause a DoS condition in the contract. (DoS with unexpected revert)
+  * External calls can fail accidentally or deliberately, which can cause a DoS condition in the contract. For example, contracts that receive Ether do not contain fallback or receive functions. (DoS with unexpected revert)
 * [Randomness](src/test/Randomness.sol) : 
   * Use of global variables like block hash, block number, block timestamp and other fields is insecure, miner and attacker can control it.
 * [Visibility](src/test/Visibility.sol) : 
-  * Insecure visibility settings give attackers straightforward ways to access a contract's private values or logic.
+  * The default visibility of the function is Public. If there is an unsafe visibility setting, the attacker can directly call the sensitive function in the smart contract.
   * Real case : [FlippazOne NFT](https://github.com/SunWeb3Sec/DeFiHackLabs#20220706-flippazone-nft----accesscontrol) | [88mph NFT](https://github.com/SunWeb3Sec/DeFiHackLabs#20210607-88mph-nft---access-control) | [CoinstoreNFT Public Burn](https://etherscan.io/token/0x59585bbC68CDE26261Eb4B417A84aCAa5c5841db#code) | [Sandbox LAND Public Burn](https://etherscan.io/address/0x50f5474724e0Ee42D9a4e711ccFB275809Fd6d4a#code)
 * [txorigin - phishing](src/test/txorigin.sol) : 
-  * tx.origin is a global variable in Solidity which returns the address of the account that sent the transaction. Using the variable for authorization could make a contract vulnerable if an authorized account calls into a malicious contract. 
+  * tx.origin is a global variable in Solidity;  using this variable for authentication in a smart contract makes the contract vulnerable to phishing attacks.
 * [Uninitialized state variables](src/test/Uninitialized_variables.sol) : 
   * Uninitialized local storage variables may contain the value of other storage variables in the contract; this fact can cause unintentional vulnerabilities, or be exploited deliberately.
 * [Storage collision 1](src/test/Storage-collision.sol) | [Storage collision 2 (Audius)](src/test/Storage-collision-audio.sol) : 
   * If variable’s storage location is fixed and it happens that there is another variable that has the same index/offset of the storage location in the implementation contract, then there will be a storage collision. [REF](https://blog.openzeppelin.com/proxy-patterns/)
 * [Approval scam](src/test/ApproveScam.sol) : 
-  * Too many scams abusing approve or setApprovalForAll to drain your tokens.
+  * Most current scams use approve or setApprovalForAll to defraud your transfer rights. Be especially careful with this part.
 * [Signature replay 1](src/test/SignatureReplay.sol) | [Signature replay 2 (NBA)](src/test/SignatureReplayNBA.sol): 
   * Missing protection against signature replay attacks, Same signature can be used multiple times to execute a function. [REF1](https://medium.com/cryptronics/signature-replay-vulnerabilities-in-smart-contracts-3b6f7596df57), [REF2](https://coinsbench.com/signature-replay-hack-solidity-13-735997ad02e5), [REF3](https://medium.com/cypher-core/replay-attack-vulnerability-in-ethereum-smart-contracts-introduced-by-transferproxy-124bf3694e25), [REF4](https://media.defcon.org/DEF%20CON%2026/DEF%20CON%2026%20presentations/DEFCON-26-Bai-Zheng-Chai-Wang-You-May-Have-Paid-more-than-You-Imagine.pdf)
 * [Data location - storage vs memory](src/test/DataLocation.sol) : 
-  * Misuse of storage and memory references to get unexpected value. [REF1](https://mudit.blog/cover-protocol-hack-analysis-tokens-minted-exploit/), [REF2](https://www.educative.io/answers/storage-vs-memory-in-solidity)
+  * Incorrect use of storage slot and memory to save variable state can easily cause contracts to use values not updated for calculations. [REF1](https://mudit.blog/cover-protocol-hack-analysis-tokens-minted-exploit/), [REF2](https://www.educative.io/answers/storage-vs-memory-in-solidity)
 * [DirtyBytes](src/test/Dirtybytes.sol) : 
   * Copying ``bytes`` arrays from memory or calldata to storage may result in dirty storage values.
   
