@@ -11,10 +11,6 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract ContractTest is Test {
     HerToken HerTokenContract;
-    bool complete;
-    uint maxMints = 10;
-    address alice = vm.addr(1);
-    address eve = vm.addr(2);
 
     function testSafeMint() public {
     HerTokenContract = new HerToken();
@@ -33,7 +29,6 @@ contract ContractTest is Test {
   ) public returns (bytes4) {
 
  //   HerTokenContract.safeMint{value: 1 ether}(address(this),30);
-    
     return this.onERC721Received.selector;
   }
     receive() payable external{}
