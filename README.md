@@ -56,6 +56,8 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
   * Incorrect use of storage slot and memory to save variable state can easily cause contracts to use values not updated for calculations. [REF1](https://mudit.blog/cover-protocol-hack-analysis-tokens-minted-exploit/), [REF2](https://www.educative.io/answers/storage-vs-memory-in-solidity)
 * [DirtyBytes](src/test/Dirtybytes.sol) : 
   * Copying ``bytes`` arrays from memory or calldata to storage may result in dirty storage values.
+* [Immunefi #spotthebugchallenge!](src/test/Immunefi_ch1.sol) : 
+  * Incorrect check msg.value, we can mint many NFTs with 1 ETH.
   
 ## Link reference
 
