@@ -26,6 +26,8 @@ function testSignatureReplay() public {
     bytes32 hash = keccak256(abi.encodePacked(address(alice),address(bob),uint256(499),uint256(1),uint256(0)));
     emit log_named_bytes32("hash",hash);
 
+// The {r, s, v} signature can be combined into one 65-byte-long sequence: 32 bytes for r , 32 bytes for s , and one byte for v
+
     (uint8 v, bytes32 r, bytes32 s) = vm.sign(1, hash);
     emit log_named_uint("v",v);
     emit log_named_bytes32 ("r",r);
