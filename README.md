@@ -58,7 +58,19 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
   * Copying ``bytes`` arrays from memory or calldata to storage may result in dirty storage values.
 * [Immunefi #spotthebugchallenge!](src/test/Immunefi_ch1.sol) : 
   * Incorrect check msg.value, we can mint many NFTs with 1 ETH.
-  
+## Bug Reproduce
+### 20220623 Sense Finance - Access control
+
+Missing access control in onSwap()
+#### Bounty: $50,000
+Testing
+```sh
+forge test --contracts ./src/test/SenseFinance_exp.sol -vv 
+```
+#### Link reference
+https://medium.com/immunefi/sense-finance-access-control-issue-bugfix-review-32e0c806b1a0
+
+
 ## Link reference
 
 * [Mastering Ethereum - Smart Contract Security](https://github.com/ethereumbook/ethereumbook/blob/develop/09smart-contracts-security.asciidoc)
