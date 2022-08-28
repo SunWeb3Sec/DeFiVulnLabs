@@ -61,6 +61,10 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
 * [Immunefi #spotthebugchallenge 2](src/test/Immunefi_ch2.sol) 
 
 ## Bug Reproduce
+### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
+#### Bounty: $250K [POC](https://github.com/sherlock-protocol/bug-poc/) | [Reference](https://mirror.xyz/0xE400820f3D60d77a3EC8018d44366ed0d334f93C/LOZF1YBcH1eBdxlC6HP223cAMeTpNgQ-Kc4EjQuxmGA)
+
+
 ### 20220623 Sense Finance - Access control
 
 Missing access control in onSwap()
@@ -71,6 +75,7 @@ forge test --contracts ./src/test/SenseFinance_exp.sol -vv
 ```
 #### Link reference
 https://medium.com/immunefi/sense-finance-access-control-issue-bugfix-review-32e0c806b1a0
+
 
 
 ## Link reference
