@@ -17,7 +17,7 @@ Storage vs. memory in Solidity: https://www.educative.io/answers/storage-vs-memo
 contract ContractTest is Test {
         Array ArrayContract;
 
-function testOverflow() public {
+function testDataLocation() public {
     address alice = vm.addr(1);
     address bob = vm.addr(2);
     vm.deal(address(alice), 1 ether);   
