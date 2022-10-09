@@ -38,6 +38,7 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
   * The attacker only needs to write the code in the constructor of the smart contract to bypass the detection mechanism of whether it is a smart contract.
 * [DOS](src/test/DOS.sol) : 
   * External calls can fail accidentally or deliberately, which can cause a DoS condition in the contract. For example, contracts that receive Ether do not contain fallback or receive functions. (DoS with unexpected revert)
+  * Real case : [Charged Particles](https://medium.com/immunefi/charged-particles-griefing-bug-fix-postmortem-d2791e49a66b)
 * [Randomness](src/test/Randomness.sol) : 
   * Use of global variables like block hash, block number, block timestamp and other fields is insecure, miner and attacker can control it.
 * [Visibility](src/test/Visibility.sol) : 
