@@ -24,7 +24,7 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
   * Not following [checks-effects-interactions](https://fravoll.github.io/solidity-patterns/checks_effects_interactions.html) pattern and no ReentrancyGuard. 
 * [Read Only Reentrancy](src/test/ReadOnlyReentrancy.sol) : 
   * An external call from a secure smart contract "A" invokes the fallback() function in the attacker's contract. The attacker executes the code in the fallback() function to run against a target contract "B", which some how indirectly related to contract "A". 
-  * In the given example, Contract "B" dervies the price of the LP token from Contract "A"
+  * In the given example, Contract "B" derives the price of the LP token from Contract "A"
 * [ERC777 callbacks and reentrancy](src/test/ERC777-reentrancy.sol) : 
   * ERC777 tokens allow arbitrary callbacks via hooks that are called during token transfers. Malicious contract addresses may cause reentrancy on such callbacks if reentrancy guards are not used. [REF1](https://medium.com/cream-finance/c-r-e-a-m-finance-post-mortem-amp-exploit-6ceb20a630c5), [REF2](https://quantstamp.com/blog/how-the-dforce-hacker-used-reentrancy-to-steal-25-million), [Cream POC](https://github.com/SunWeb3Sec/DeFiHackLabs#20210830-cream-finance---flashloan-attack--reentrancy)
   * [ERC667 reentrancy](https://github.com/SunWeb3Sec/DeFiHackLabs#20220313-hundred-finance---erc667-reentrancy) | [ERC827 reentrancy](https://ethereum-magicians.org/t/erc-827-callbacks-can-lead-to-reentrancy-attack-vectors/660)
