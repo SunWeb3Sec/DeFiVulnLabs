@@ -194,3 +194,10 @@ interface IERC20 {
   event Transfer(address indexed from, address indexed to, uint value);
   event Approval(address indexed owner, address indexed spender, uint value);
 }
+
+interface IFantasticWeslie {
+  
+  function ownerOf(uint256 tokenId) external view returns (address owner);
+
+  function mint(bytes32[] memory merkleProof) external payable;
+}
