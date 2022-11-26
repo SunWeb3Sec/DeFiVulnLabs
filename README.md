@@ -63,7 +63,10 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
   * Copying ``bytes`` arrays from memory or calldata to storage may result in dirty storage values.
 * [Invariants](src/test/Invariant.sol) : 
   * Assert is used to check invariants. Those are states our contract or variables should never reach, ever. For example, if we decrease a value then it should never get bigger, only smaller. 
-  
+* [NFT Mint via Exposed Metadata](src/test/NFTMint_exposedMetadata.sol) : 
+  * The contract is vulnerable to CVE-2022-38217, this could lead to the early disclosure of metadata of all NFTs in the project. As a result, attacker can find out valuable NFTs and then target mint of specific NFTs by monitoring mempool and sell the NFTs for a profit in secondary market
+  * The issue is the metadata should be visible after the minting is completed
+
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
 #### Bounty: $250K [POC](https://github.com/sherlock-protocol/bug-poc/) | [Reference](https://mirror.xyz/0xE400820f3D60d77a3EC8018d44366ed0d334f93C/LOZF1YBcH1eBdxlC6HP223cAMeTpNgQ-Kc4EjQuxmGA)
