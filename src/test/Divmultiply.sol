@@ -19,7 +19,7 @@ function testMiscalculation() public {
     console.log("Perform Correct calculation Contract");
     console.log("Scenario: DeFi store 10% off now, Then we buy 1 item price: $80.");
     console.log("Subtract  the discount, get the sale price:",CalculationContract.price(80,90));
-    console.log("Multiply before dividing is correct . 80*90/100=72");
+    console.log("Multiply before dividing is correct. 80*90/100=72");
     }
 
 }
