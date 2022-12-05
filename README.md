@@ -66,6 +66,8 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
 * [NFT Mint via Exposed Metadata](src/test/NFTMint_exposedMetadata.sol) : 
   * The contract is vulnerable to CVE-2022-38217, this could lead to the early disclosure of metadata of all NFTs in the project. As a result, attacker can find out valuable NFTs and then target mint of specific NFTs by monitoring mempool and sell the NFTs for a profit in secondary market
   * The issue is the metadata should be visible after the minting is completed
+* [Divide before multiply](src/test/Divmultiply.sol) : 
+  * Performing multiplication before division is generally better to avoid loss of precision because Solidity integer division might truncate.
 
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
