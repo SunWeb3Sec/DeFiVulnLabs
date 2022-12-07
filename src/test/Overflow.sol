@@ -71,7 +71,7 @@ contract ContractTest is Test {
         console.log("Bob deposit 1 Ether...");
         vm.startPrank(bob); 
         TimeLockContract.deposit{value: 1 ether}();
-        console.log("Bob balance", alice.balance);
+        console.log("Bob balance", bob.balance);
 
         // exploit here
         TimeLockContract.increaseLockTime(
