@@ -68,7 +68,9 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
   * The issue is the metadata should be visible after the minting is completed
 * [Divide before multiply](src/test/Divmultiply.sol) : 
   * Performing multiplication before division is generally better to avoid loss of precision because Solidity integer division might truncate.
-
+* [Uncheck return value](src/test/Returnvalue.sol) : 
+  * Some tokens (like USDT) don't correctly implement the EIP20 standard and their transfer/ transferFrom function return void instead of a success boolean. Calling these functions with the correct EIP20 function signatures will always revert.
+  
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
 #### Bounty: $250K [POC](https://github.com/sherlock-protocol/bug-poc/) | [Reference](https://mirror.xyz/0xE400820f3D60d77a3EC8018d44366ed0d334f93C/LOZF1YBcH1eBdxlC6HP223cAMeTpNgQ-Kc4EjQuxmGA)
