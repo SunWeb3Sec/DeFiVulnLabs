@@ -68,7 +68,7 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
   * The issue is the metadata should be visible after the minting is completed
 * [Divide before multiply](src/test/Divmultiply.sol) : 
   * Performing multiplication before division is generally better to avoid loss of precision because Solidity integer division might truncate.
-* [Uncheck return value](src/test/Returnvalue.sol) : 
+* [Unchecked return value](src/test/Returnvalue.sol) : 
   * Some tokens (like USDT) don't correctly implement the EIP20 standard and their transfer/ transferFrom function return void instead of a success boolean. Calling these functions with the correct EIP20 function signatures will always revert.
   
 ## Bug Reproduce
