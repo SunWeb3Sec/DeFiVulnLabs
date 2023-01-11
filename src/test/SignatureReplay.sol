@@ -27,6 +27,9 @@ function testSignatureReplay() public {
     emit log_named_bytes32("hash",hash);
 
 // The {r, s, v} signature can be combined into one 65-byte-long sequence: 32 bytes for r , 32 bytes for s , and one byte for v
+//r - a point on the secp256k1 elliptic curve (32 bytes)
+//s - a point on the secp256k1 elliptic curve (32 bytes)
+//v - recovery id (1 byte)
 
     (uint8 v, bytes32 r, bytes32 s) = vm.sign(1, hash);
     emit log_named_uint("v",v);
