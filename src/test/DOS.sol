@@ -28,7 +28,7 @@ function testDOS() public {
     console.log("Balance of KingOfEtherContract", KingOfEtherContract.balance());
     console.log("Attack completed, Alice claimthrone again, she will fail");
     vm.prank(alice);
-    KingOfEtherContract.claimThrone{value: 1 ether}() ;
+    KingOfEtherContract.claimThrone{value: 4 ether}() ;
   
     }
     receive() payable external{}
