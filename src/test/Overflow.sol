@@ -78,13 +78,13 @@ contract ContractTest is Test {
             type(uint).max + 1 - TimeLockContract.lockTime(bob)
         );
 
-        console.log("Bob will successfully to withdraw, because the lock time is overflowed");
+        console.log("Bob will successfully withdraw, because the lock time is overflowed");
         TimeLockContract.withdraw();
         console.log("Bob balance", bob.balance);
         vm.stopPrank();
 
         vm.prank(alice);
-        console.log("Alice will fail to withdraw, because the lock time not expired");
+        console.log("Alice will fail to withdraw, because the lock time did not expire");
         TimeLockContract.withdraw();    // expect revert
     }
 }
