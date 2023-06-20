@@ -10,7 +10,7 @@ EIP20 standard:
 Returns a boolean value indicating whether the operation succeeded.
 function transfer(address to, uint256 amount) external returns (bool);
 
-USDT don't correctly implement the EIP20 standard, 
+USDT doesn't correctly implement the EIP20 standard,
 so calling these functions with the correct EIP20 function signatures will always revert.
 function transfer(address to, uint256 value) external;
 
