@@ -4,16 +4,17 @@ pragma solidity ^0.8.15;
 import "forge-std/Test.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 /*
-Demo:
-Phantom permit 
+
+Phantom function: Accepts any call to a function that it doesn't actually define, without reverting.
+key:
+1.Token that does not support EIP-2612 permit. 
+2.Token has a fallback function.
+For example: WETH.
 
 Mitigation  
-Use safePermit
+Use SafeERC20's safePermit - Revert on invalid signature.
 https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/utils/SafeERC20.sol#LL89C14-L89C24
 
-REF
-https://media.dedaub.com/phantom-functions-and-the-billion-dollar-no-op-c56f062ae49f
-https://medium.com/multichainorg/multichain-contract-vulnerability-post-mortem-d37bfab237c8
 */
 
 contract ContractTest is Test {
@@ -30,10 +31,8 @@ function testVulnPhantomPermit() public {
 
     address alice = vm.addr(1);
     vm.deal(address(alice), 10 ether);  
-    address bob = vm.addr(2);
 
 
-  //  console.log("Alice's STA balance:", STAContract.balanceOf(alice));  // charge 1% fee
     vm.startPrank(alice);
     WETH9Contract.deposit{value:10 ether}();
     WETH9Contract.approve(address(VulnPermitContract),type(uint256).max);
@@ -42,30 +41,36 @@ function testVulnPhantomPermit() public {
     WETH9Contract.balanceOf(address(VulnPermitContract));
     VulnPermitContract.withdraw(1000);
     WETH9Contract.balanceOf(address(this));
-   // console.log("Alice deposit 10000 STA, but Alice's STA balance in VulnVaultContract:",  VulnVaultContract.getBalance(alice));  // charge 1% fee
- //   assertEq(STAContract.balanceOf(address(VulnVaultContract)),VulnVaultContract.getBalance(alice));
+
     }
 
-/*
-function testFeeOnTransfer() public {
-
-    address alice = vm.addr(1);
-    address bob = vm.addr(2);
-    STAContract.balanceOf(address(this));
-    STAContract.transfer(alice,1000000); 
-    console.log("Alice's STA balance:", STAContract.balanceOf(alice));  // charge 1% fee
-    vm.startPrank(alice);
-    STAContract.approve(address(VaultContract),type(uint256).max);
-    VaultContract.deposit(10000);
-    //VaultContract.getBalance(alice);
-
-    console.log("Alice deposit 10000, Alice's STA balance in VaultContract:",  VaultContract.getBalance(alice));  // charge 1% fee
-    assertEq(STAContract.balanceOf(address(VaultContract)),VaultContract.getBalance(alice));
-    }*/
     receive() payable external{}
 }
 
 contract VulnPermit {
+    IERC20 public token;
+
+    constructor(IERC20 _token) {
+        token = _token;
+    }
+
+    function deposit(uint256 amount) public {
+        require(token.transferFrom(msg.sender, address(this), amount), "Transfer failed");
+    }
+
+    function depositWithPermit(address target, uint256 amount, uint8 v, bytes32 r, bytes32 s) public {
+        (bool success,) = address(token).call(abi.encodeWithSignature("permit(address,uint256,uint8,bytes32,bytes32)", target, amount, v, r, s));
+        require(success, "Permit failed");
+
+        require(token.transferFrom(target, address(this), amount), "Transfer failed");
+    }
+
+    function withdraw(uint256 amount) public {
+        require(token.transfer(msg.sender, amount), "Transfer failed");
+    }
+}
+
+contract Permit {
     IERC20 public token;
 
     constructor(IERC20 _token) {
