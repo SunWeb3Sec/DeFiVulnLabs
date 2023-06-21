@@ -78,7 +78,10 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
   * Accepts any call to a function that it doesn't actually define, without reverting. For example: WETH. [REF](https://media.dedaub.com/phantom-functions-and-the-billion-dollar-no-op-c56f062ae49f)
   * Attack Vector
     * Token that does not support EIP-2612 permit.
-    * Token has a fallback function.  
+    * Token has a fallback function.
+* [First deposit bug](src/test/first-depoist.sol) : 
+  * First depositor can break minting of shares: The attack vector and impact is the same as [TOB-YEARN-003](https://github.com/yearn/yearn-security/blob/master/audits/20210719_ToB_yearn_vaultsv2/ToB_-_Yearn_Vault_v_2_Smart_Contracts_Audit_Report.pdf), where users may not receive shares in exchange for their deposits if the total asset amount has been manipulated through a large “donation”.
+    
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
 #### Bounty: $250K [POC](https://github.com/sherlock-protocol/bug-poc/) | [Reference](https://mirror.xyz/0xE400820f3D60d77a3EC8018d44366ed0d334f93C/LOZF1YBcH1eBdxlC6HP223cAMeTpNgQ-Kc4EjQuxmGA)
