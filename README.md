@@ -74,7 +74,11 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
   * Some tokens do not revert on failure but instead return false, for example, [ZRX](https://etherscan.io/token/0xe41d2489571d322189246dafa5ebde1f4699f498#code).
 * [Incompatibility with deflationary / fee-on-transfer tokens](src/test/fee-on-transfer.sol) : 
   * The actual deposited amount might be lower than the specified depositAmount of the function parameter. [REF1](https://twitter.com/1nf0s3cpt/status/1671084918506684418) ,[REF2](https://medium.com/1inch-network/balancer-hack-2020-a8f7131c980e), [REF3](https://twitter.com/BlockSecTeam/status/1600442137811689473)
-  
+* [Phantom function - Permit Function](src/test/phantom-permit.sol) : 
+  * Accepts any call to a function that it doesn't actually define, without reverting. For example: WETH. [REF](https://media.dedaub.com/phantom-functions-and-the-billion-dollar-no-op-c56f062ae49f)
+  * Attack Vector
+    * Token that does not support EIP-2612 permit.
+    * Token has a fallback function.  
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
 #### Bounty: $250K [POC](https://github.com/sherlock-protocol/bug-poc/) | [Reference](https://mirror.xyz/0xE400820f3D60d77a3EC8018d44366ed0d334f93C/LOZF1YBcH1eBdxlC6HP223cAMeTpNgQ-Kc4EjQuxmGA)
