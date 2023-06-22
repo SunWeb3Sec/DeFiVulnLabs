@@ -8,6 +8,13 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 Demo:
 First pool depositor can be front-run and have part of their deposit stolen
+In this case, we can control the variable "_supplied." 
+By depositing a small amount of loan tokens to obtain pool tokens, 
+we can front-run other depositors' transactions and inflate the price of pool tokens through a substantial "donation."
+Consequently, the attacker can withdraw a greater quantity of loan tokens than they initially possessed.
+
+This calculation issue arises because, in Solidity, if the pool token value for a user becomes less than 1,
+it is essentially rounded down to 0.
 
 Mitigation  
 Consider minting a minimal amount of pool tokens during the first deposit 
