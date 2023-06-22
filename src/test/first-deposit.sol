@@ -19,8 +19,9 @@ it is essentially rounded down to 0.
 Mitigation  
 Consider minting a minimal amount of pool tokens during the first deposit 
 and sending them to zero address, this increases the cost of the attack. 
-Uniswap V2 uses the value 1000 as it is small enough to don't hurt the first minter, 
-while still increasing the cost of this attack by 1000x.
+Uniswap V2 solved this problem by sending the first 1000 LP tokens to the zero address. 
+The same can be done in this case i.e. when totalSupply() == 0, 
+send the first min liquidity LP tokens to the zero address to enable share dilution.
 
 REF:
 https://defihacklabs.substack.com/p/solidity-security-lesson-2-first
