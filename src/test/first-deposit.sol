@@ -16,7 +16,7 @@ Uniswap V2 uses the value 1000 as it is small enough to don't hurt the first min
 while still increasing the cost of this attack by 1000x.
 
 REF:
-https://akshaysrivastav.hashnode.dev/first-deposit-bug-in-compoundv2-and-its-forks
+https://defihacklabs.substack.com/p/solidity-security-lesson-2-first
 https://github.com/sherlock-audit/2023-02-surge-judging/issues/1
 https://github.com/transmissions11/solmate/issues/178
 */
