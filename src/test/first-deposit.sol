@@ -62,13 +62,13 @@ function testFirstDeposit() public {
     SimplePoolContract.deposit(2 ether);
     vm.stopPrank();
     vm.startPrank(alice);
-    console.log("totalShares", SimplePoolContract.totalShares() );
+
     MyTokenContract.balanceOf(address(SimplePoolContract));
 
     // Alice withdraws and gets 1.5 ether, making a profit
     SimplePoolContract.withdraw(1);
     assertEq(MyTokenContract.balanceOf(alice), 1.5 ether);
-
+   console.log("Alice balance", MyTokenContract.balanceOf(alice) );
     }
 
     receive() payable external{}
