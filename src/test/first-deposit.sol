@@ -58,6 +58,8 @@ function testFirstDeposit() public {
     vm.stopPrank();
     vm.startPrank(bob);
     // Bob deposits 2 ether, gets 1 pool token due to inflated price
+    // uint shares = _tokenAmount * _sharesTotalSupply / _supplied;
+    // shares = 2000000000000000000 * 1 / 1000000000000000001 = 1.9999999999999999999 => round down to 1.
     MyTokenContract.approve(address(SimplePoolContract), 2 ether);
     SimplePoolContract.deposit(2 ether);
     vm.stopPrank();
@@ -68,7 +70,7 @@ function testFirstDeposit() public {
     // Alice withdraws and gets 1.5 ether, making a profit
     SimplePoolContract.withdraw(1);
     assertEq(MyTokenContract.balanceOf(alice), 1.5 ether);
-   console.log("Alice balance", MyTokenContract.balanceOf(alice) );
+    console.log("Alice balance", MyTokenContract.balanceOf(alice) );
     }
 
     receive() payable external{}
