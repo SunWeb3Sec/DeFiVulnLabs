@@ -79,7 +79,7 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
   * Attack Vector
     * Token that does not support EIP-2612 permit.
     * Token has a fallback function.
-* [First deposit bug](src/test/first-depoist.sol) : 
+* [First deposit bug](src/test/first-deposit.sol) : 
   * First depositor can break minting of shares: The attack vector and impact is the same as [TOB-YEARN-003](https://github.com/yearn/yearn-security/blob/master/audits/20210719_ToB_yearn_vaultsv2/ToB_-_Yearn_Vault_v_2_Smart_Contracts_Audit_Report.pdf), where users may not receive shares in exchange for their deposits if the total asset amount has been manipulated through a large “donation”. [REF1](https://defihacklabs.substack.com/p/solidity-security-lesson-2-first), [REF2](https://github.com/transmissions11/solmate/issues/178)
     
 ## Bug Reproduce
