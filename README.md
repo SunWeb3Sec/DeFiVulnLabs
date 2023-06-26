@@ -81,6 +81,9 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
     * Token has a fallback function.
 * [First deposit bug](src/test/first-deposit.sol) : 
   * First depositor can break minting of shares: The attack vector and impact is the same as [TOB-YEARN-003](https://github.com/yearn/yearn-security/blob/master/audits/20210719_ToB_yearn_vaultsv2/ToB_-_Yearn_Vault_v_2_Smart_Contracts_Audit_Report.pdf), where users may not receive shares in exchange for their deposits if the total asset amount has been manipulated through a large “donation”. [REF1](https://defihacklabs.substack.com/p/solidity-security-lesson-2-first), [REF2](https://github.com/transmissions11/solmate/issues/178)
+* [Empty loop](src/test/empty-loop.sol) : 
+  * Due to insufficient validation, An attacker can simply pass an empty array to bypass the loop & signature verification. [REF](https://dacian.me/exploiting-developer-assumptions#heading-unexpected-empty-inputs)
+
     
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
