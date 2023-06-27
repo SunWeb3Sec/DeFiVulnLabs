@@ -85,6 +85,7 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
   * Due to insufficient validation, An attacker can simply pass an empty array to bypass the loop & signature verification. [REF](https://dacian.me/exploiting-developer-assumptions#heading-unexpected-empty-inputs)
 * [Unsafe downcasting](src/test/unsafe-downcast.sol) : 
   * Downcasting from a larger integer type to a smaller one without checks can lead to unexpected behavior if the value of the larger integer is outside the range of the smaller one. This could lead to unexpected results due to overflow. [REF](https://github.com/sherlock-audit/2022-10-union-finance-judging/issues/96)
+
     
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
