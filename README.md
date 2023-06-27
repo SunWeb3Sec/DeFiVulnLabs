@@ -1,7 +1,8 @@
 # DeFiVulnLabs
 This was an internal Web3 solidity security training in [XREX](https://xrex.io/). I want to share these materials with everyone interested in Web3 security and how to find vulnerabilities in code and exploit them. Every vulnerability testing uses Foundry. Faster and easier!
 
-A collection of vulnerable code snippets taken from [Solidity by Example](https://solidity-by-example.org/), [SWC Registry](https://swcregistry.io/) and [Blockchain CTF](https://github.com/blockthreat/blocksec-ctfs), etc.  
+Currently supports 31 types of vulnerabilities.
+
 ##### Education only! Please do not use it in production.
 
 ## Getting Started
@@ -75,16 +76,16 @@ A collection of vulnerable code snippets taken from [Solidity by Example](https:
 * [Incompatibility with deflationary / fee-on-transfer tokens](src/test/fee-on-transfer.sol) : 
   * The actual deposited amount might be lower than the specified depositAmount of the function parameter. [REF1](https://twitter.com/1nf0s3cpt/status/1671084918506684418) ,[REF2](https://medium.com/1inch-network/balancer-hack-2020-a8f7131c980e), [REF3](https://twitter.com/BlockSecTeam/status/1600442137811689473)
 * [Phantom function - Permit Function](src/test/phantom-permit.sol) : 
-  * Accepts any call to a function that it doesn't actually define, without reverting. For example: WETH. [REF](https://media.dedaub.com/phantom-functions-and-the-billion-dollar-no-op-c56f062ae49f)
+  * Accepts any call to a function that it doesn't actually define, without reverting. For example: WETH. [REF1](https://twitter.com/1nf0s3cpt/status/1671347058568237057), [REF2](https://media.dedaub.com/phantom-functions-and-the-billion-dollar-no-op-c56f062ae49f)
   * Attack Vector
     * Token that does not support EIP-2612 permit.
     * Token has a fallback function.
 * [First deposit bug](src/test/first-deposit.sol) : 
-  * First depositor can break minting of shares: The attack vector and impact is the same as [TOB-YEARN-003](https://github.com/yearn/yearn-security/blob/master/audits/20210719_ToB_yearn_vaultsv2/ToB_-_Yearn_Vault_v_2_Smart_Contracts_Audit_Report.pdf), where users may not receive shares in exchange for their deposits if the total asset amount has been manipulated through a large “donation”. [REF1](https://defihacklabs.substack.com/p/solidity-security-lesson-2-first), [REF2](https://github.com/transmissions11/solmate/issues/178)
+  * First depositor can break minting of shares: The attack vector and impact is the same as [TOB-YEARN-003](https://github.com/yearn/yearn-security/blob/master/audits/20210719_ToB_yearn_vaultsv2/ToB_-_Yearn_Vault_v_2_Smart_Contracts_Audit_Report.pdf), where users may not receive shares in exchange for their deposits if the total asset amount has been manipulated through a large “donation”. [REF1](https://twitter.com/1nf0s3cpt/status/1672136485439672321), [REF2](https://defihacklabs.substack.com/p/solidity-security-lesson-2-first), [REF3](https://github.com/transmissions11/solmate/issues/178)
 * [Empty loop](src/test/empty-loop.sol) : 
   * Due to insufficient validation, An attacker can simply pass an empty array to bypass the loop & signature verification. [REF](https://dacian.me/exploiting-developer-assumptions#heading-unexpected-empty-inputs)
 * [Unsafe downcasting](src/test/unsafe-downcast.sol) : 
-  * Downcasting from a larger integer type to a smaller one without checks can lead to unexpected behavior if the value of the larger integer is outside the range of the smaller one. This could lead to unexpected results due to overflow. [REF](https://github.com/sherlock-audit/2022-10-union-finance-judging/issues/96)
+  * Downcasting from a larger integer type to a smaller one without checks can lead to unexpected behavior if the value of the larger integer is outside the range of the smaller one. This could lead to unexpected results due to overflow. [REF1](https://twitter.com/1nf0s3cpt/status/1673511868839886849) , [REF2](https://github.com/sherlock-audit/2022-10-union-finance-judging/issues/96)
 
     
 ## Bug Reproduce
