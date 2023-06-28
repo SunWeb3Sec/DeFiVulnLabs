@@ -86,7 +86,8 @@ Currently supports 31 types of vulnerabilities.
   * Due to insufficient validation, An attacker can simply pass an empty array to bypass the loop & signature verification. [REF](https://dacian.me/exploiting-developer-assumptions#heading-unexpected-empty-inputs)
 * [Unsafe downcasting](src/test/unsafe-downcast.sol) : 
   * Downcasting from a larger integer type to a smaller one without checks can lead to unexpected behavior if the value of the larger integer is outside the range of the smaller one. This could lead to unexpected results due to overflow. [REF1](https://twitter.com/1nf0s3cpt/status/1673511868839886849) , [REF2](https://github.com/sherlock-audit/2022-10-union-finance-judging/issues/96)
-
+* [Price manipulation](src/test/Price_manipulation.sol) : 
+  * Incorrect price calculation over balanceOf, getReverse may refer to a situation where the price of a token or asset is not accurately calculated based on the balanceOf function. [REF](https://twitter.com/1nf0s3cpt/status/1673948842738487296)
     
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
