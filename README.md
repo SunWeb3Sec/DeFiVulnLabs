@@ -88,7 +88,9 @@ Currently supports 32 types of vulnerabilities.
   * Downcasting from a larger integer type to a smaller one without checks can lead to unexpected behavior if the value of the larger integer is outside the range of the smaller one. This could lead to unexpected results due to overflow. [REF1](https://twitter.com/1nf0s3cpt/status/1673511868839886849) , [REF2](https://github.com/sherlock-audit/2022-10-union-finance-judging/issues/96)
 * [Price manipulation](src/test/Price_manipulation.sol) : 
   * Incorrect price calculation over balanceOf, getReverse may refer to a situation where the price of a token or asset is not accurately calculated based on the balanceOf function. [REF](https://twitter.com/1nf0s3cpt/status/1673948842738487296)
-    
+* [ecrecover returns address(0)](src/test/ecrecover.sol) : 
+  * If v value isn't 27 or 28. it will return address(0)
+     
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
 #### Bounty: $250K [POC](https://github.com/sherlock-protocol/bug-poc/) | [Reference](https://mirror.xyz/0xE400820f3D60d77a3EC8018d44366ed0d334f93C/LOZF1YBcH1eBdxlC6HP223cAMeTpNgQ-Kc4EjQuxmGA)
