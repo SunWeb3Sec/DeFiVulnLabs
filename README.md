@@ -1,7 +1,7 @@
 # DeFiVulnLabs
 This was an internal Web3 solidity security training in [XREX](https://xrex.io/). I want to share these materials with everyone interested in Web3 security and how to find vulnerabilities in code and exploit them. Every vulnerability testing uses Foundry. Faster and easier!
 
-Currently supports 33 types of vulnerabilities.
+Currently supports 34 types of vulnerabilities.
 
 ##### Education only! Please do not use it in production.
 
@@ -90,7 +90,9 @@ Currently supports 33 types of vulnerabilities.
   * Incorrect price calculation over balanceOf, getReverse may refer to a situation where the price of a token or asset is not accurately calculated based on the balanceOf function. [REF](https://twitter.com/1nf0s3cpt/status/1673948842738487296)
 * [ecRecover returns address(0)](src/test/ecrecover.sol) : 
   * If v value isn't 27 or 28. it will return address(0). [REF](https://twitter.com/1nf0s3cpt/status/1674268926761668608)
-     
+* [Oracle stale price](src/test/Oracle-stale.sol) : 
+  * Oracle data feed is insufficiently validated. [REF](https://twitter.com/1nf0s3cpt/status/1674611468975878144)
+    
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
 #### Bounty: $250K [POC](https://github.com/sherlock-protocol/bug-poc/) | [Reference](https://mirror.xyz/0xE400820f3D60d77a3EC8018d44366ed0d334f93C/LOZF1YBcH1eBdxlC6HP223cAMeTpNgQ-Kc4EjQuxmGA)
