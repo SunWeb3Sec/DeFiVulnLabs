@@ -92,7 +92,9 @@ Currently supports 34 types of vulnerabilities.
   * If v value isn't 27 or 28. it will return address(0). [REF](https://twitter.com/1nf0s3cpt/status/1674268926761668608)
 * [Oracle stale price](src/test/Oracle-stale.sol) : 
   * Oracle data feed is insufficiently validated. [REF](https://twitter.com/1nf0s3cpt/status/1674611468975878144)
-    
+* [Precision Loss - Rounded down to zero](src/test/Precision-loss.sol) : 
+  * Avoid any situation that if the numerator is smaller than the denominator, the result will be zero. [REF](https://twitter.com/1nf0s3cpt/status/1675805135061286914)
+  
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
 #### Bounty: $250K [POC](https://github.com/sherlock-protocol/bug-poc/) | [Reference](https://mirror.xyz/0xE400820f3D60d77a3EC8018d44366ed0d334f93C/LOZF1YBcH1eBdxlC6HP223cAMeTpNgQ-Kc4EjQuxmGA)
