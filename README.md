@@ -1,7 +1,7 @@
 # DeFiVulnLabs
 This was an internal Web3 solidity security training in [XREX](https://xrex.io/). I want to share these materials with everyone interested in Web3 security and how to find vulnerabilities in code and exploit them. Every vulnerability testing uses Foundry. Faster and easier!
 
-Currently supports 34 types of vulnerabilities.
+Currently supports 35 types of vulnerabilities.
 
 ##### Education only! Please do not use it in production.
 
