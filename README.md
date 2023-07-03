@@ -93,7 +93,7 @@ Currently supports 34 types of vulnerabilities.
 * [Oracle stale price](src/test/Oracle-stale.sol) : 
   * Oracle data feed is insufficiently validated. [REF](https://twitter.com/1nf0s3cpt/status/1674611468975878144)
 * [Precision Loss - Rounded down to zero](src/test/Precision-loss.sol) : 
-  * Avoid any situation that if the numerator is smaller than the denominator, the result will be zero. [REF]
+  * Avoid any situation that if the numerator is smaller than the denominator, the result will be zero. [REF](https://twitter.com/1nf0s3cpt/status/1675805135061286914)
   
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
