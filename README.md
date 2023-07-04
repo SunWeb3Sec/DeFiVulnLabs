@@ -96,7 +96,7 @@ Currently supports 36 types of vulnerabilities.
   * Avoid any situation that if the numerator is smaller than the denominator, the result will be zero. [REF](https://twitter.com/1nf0s3cpt/status/1675805135061286914)
 * [Slippage - Incorrect deadline & slippage amount](src/test/Slippage-deadline.sol) : 
   * If both the slippage is set to 0 and there is no deadline, users might potentially lose all their tokens. [REF](https://twitter.com/1nf0s3cpt/status/1676118132992405505)
-  * 
+
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
 #### Bounty: $250K [POC](https://github.com/sherlock-protocol/bug-poc/) | [Reference](https://mirror.xyz/0xE400820f3D60d77a3EC8018d44366ed0d334f93C/LOZF1YBcH1eBdxlC6HP223cAMeTpNgQ-Kc4EjQuxmGA)
