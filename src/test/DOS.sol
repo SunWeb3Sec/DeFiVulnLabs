@@ -16,7 +16,7 @@ function testDOS() public {
 
     address alice = vm.addr(1);
     address bob = vm.addr(2);
-    vm.deal(address(alice), 1 ether);  
+    vm.deal(address(alice), 4 ether);  
     vm.deal(address(bob), 2 ether); 
     vm.prank(alice);
     KingOfEtherContract.claimThrone{value: 1 ether}() ;
@@ -28,6 +28,7 @@ function testDOS() public {
     console.log("Balance of KingOfEtherContract", KingOfEtherContract.balance());
     console.log("Attack completed, Alice claimthrone again, she will fail");
     vm.prank(alice);
+    vm.expectRevert("Failed to send Ether");
     KingOfEtherContract.claimThrone{value: 4 ether}() ;
   
     }
