@@ -12,7 +12,7 @@ If hardcoded to 0, user will accept a minimum amount of 0 output tokens from the
 Deadline: The function sets the deadline to the maximum uint256 value, 
 which means the transaction can be executed at any time.
 
-If both the slippage is set to 0 and there is no deadline, 
+If slippage is set to 0 and there is no deadline, 
 users might potentially lose all their tokens.
 
 Mitigation
