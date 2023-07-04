@@ -1,7 +1,7 @@
 # DeFiVulnLabs
 This was an internal Web3 solidity security training in [XREX](https://xrex.io/). I want to share these materials with everyone interested in Web3 security and how to find vulnerabilities in code and exploit them. Every vulnerability testing uses Foundry. Faster and easier!
 
-Currently supports 35 types of vulnerabilities.
+Currently supports 36 types of vulnerabilities.
 
 ##### Education only! Please do not use it in production.
 
@@ -94,7 +94,9 @@ Currently supports 35 types of vulnerabilities.
   * Oracle data feed is insufficiently validated. [REF](https://twitter.com/1nf0s3cpt/status/1674611468975878144)
 * [Precision Loss - Rounded down to zero](src/test/Precision-loss.sol) : 
   * Avoid any situation that if the numerator is smaller than the denominator, the result will be zero. [REF](https://twitter.com/1nf0s3cpt/status/1675805135061286914)
-  
+* [Slippage - Incorrect deadline & slippage amount](src/test/Slippage-deadline.sol) : 
+  * If both the slippage is set to 0 and there is no deadline, users might potentially lose all their tokens. [REF](https://twitter.com/1nf0s3cpt/status/1676118132992405505)
+  * 
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
 #### Bounty: $250K [POC](https://github.com/sherlock-protocol/bug-poc/) | [Reference](https://mirror.xyz/0xE400820f3D60d77a3EC8018d44366ed0d334f93C/LOZF1YBcH1eBdxlC6HP223cAMeTpNgQ-Kc4EjQuxmGA)
