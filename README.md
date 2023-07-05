@@ -97,7 +97,7 @@ Currently supports 37 types of vulnerabilities.
 * [Slippage - Incorrect deadline & slippage amount](src/test/Slippage-deadline.sol) : 
   * If both the slippage is set to 0 and there is no deadline, users might potentially lose all their tokens. [REF](https://twitter.com/1nf0s3cpt/status/1676118132992405505)
 * [abi.encodePacked() Hash Collisions](src/test/Hash-collisions.sol) : 
-  * Using abi.encodePacked() with multiple variable length arguments can, in certain situations, lead to a hash collision.[REF](https://twitter.com/1nf0s3cpt/status/1676118132992405505)
+  * Using abi.encodePacked() with multiple variable length arguments can, in certain situations, lead to a hash collision.[REF](https://twitter.com/1nf0s3cpt/status/1676476475191750656)
     
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
