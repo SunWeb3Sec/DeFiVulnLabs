@@ -3,7 +3,7 @@ This was an internal Web3 solidity security training in [XREX](https://xrex.io/)
 
 Currently supports 37 types of vulnerabilities.
 
-##### Education only! Please do not use it in production.
+**Disclaimer:** This is solely a proof of concept of common smart contract vulnerabilities and is intended only for educational purposes.
 
 ## Getting Started
 
