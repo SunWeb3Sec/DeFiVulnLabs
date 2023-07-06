@@ -1,7 +1,7 @@
 # DeFiVulnLabs
 This was an internal Web3 solidity security training in [XREX](https://xrex.io/). I want to share these materials with everyone interested in Web3 security and how to find vulnerabilities in code and exploit them. Every vulnerability testing uses Foundry. Faster and easier!
 
-Currently supports 37 types of vulnerabilities.
+Currently supports 38 types of vulnerabilities.
 
 **Disclaimer:** This is solely a proof of concept of common smart contract vulnerabilities and is intended only for educational purposes.
 
@@ -98,7 +98,9 @@ Currently supports 37 types of vulnerabilities.
   * If both the slippage is set to 0 and there is no deadline, users might potentially lose all their tokens. [REF](https://twitter.com/1nf0s3cpt/status/1676118132992405505)
 * [abi.encodePacked() Hash Collisions](src/test/Hash-collisions.sol) : 
   * Using abi.encodePacked() with multiple variable length arguments can, in certain situations, lead to a hash collision.[REF](https://twitter.com/1nf0s3cpt/status/1676476475191750656)
-    
+* [Struct Deletion Oversight](src/test/Struct-deletion.sol) : 
+  * Incomplete struct deletion leaves residual data. If you delete a struct containing a mapping, the mapping won't be deleted.[REF](https://twitter.com/1nf0s3cpt/status/1676476475191750656)
+  * 
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
 #### Bounty: $250K [POC](https://github.com/sherlock-protocol/bug-poc/) | [Reference](https://mirror.xyz/0xE400820f3D60d77a3EC8018d44366ed0d334f93C/LOZF1YBcH1eBdxlC6HP223cAMeTpNgQ-Kc4EjQuxmGA)
