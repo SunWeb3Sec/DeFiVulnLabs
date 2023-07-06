@@ -99,7 +99,7 @@ Currently supports 38 types of vulnerabilities.
 * [abi.encodePacked() Hash Collisions](src/test/Hash-collisions.sol) : 
   * Using abi.encodePacked() with multiple variable length arguments can, in certain situations, lead to a hash collision.[REF](https://twitter.com/1nf0s3cpt/status/1676476475191750656)
 * [Struct Deletion Oversight](src/test/Struct-deletion.sol) : 
-  * Incomplete struct deletion leaves residual data. If you delete a struct containing a mapping, the mapping won't be deleted.[REF](https://twitter.com/1nf0s3cpt/status/1676476475191750656)
+  * Incomplete struct deletion leaves residual data. If you delete a struct containing a mapping, the mapping won't be deleted.[REF](https://twitter.com/1nf0s3cpt/status/1676836264245592065)
     
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
