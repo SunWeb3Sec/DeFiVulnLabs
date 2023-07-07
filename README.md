@@ -102,7 +102,9 @@ Currently supports 39 types of vulnerabilities.
   * Incomplete struct deletion leaves residual data. If you delete a struct containing a mapping, the mapping won't be deleted.[REF](https://twitter.com/1nf0s3cpt/status/1676836264245592065)
 * [Array Deletion Oversight](src/test/Array-deletion.sol) : 
   * Incorrect array deletion leads to data inconsistency. [REF](https://twitter.com/1nf0s3cpt/status/1677167550277509120)
-    
+* [txGasPrice manipulation](src/test/gas-price.sol) : 
+  * Manipulation of the txGasPrice value, which can result in unintended consequences and potential financial losses. [REF]()
+  
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
 #### Bounty: $250K [POC](https://github.com/sherlock-protocol/bug-poc/) | [Reference](https://mirror.xyz/0xE400820f3D60d77a3EC8018d44366ed0d334f93C/LOZF1YBcH1eBdxlC6HP223cAMeTpNgQ-Kc4EjQuxmGA)
