@@ -1,7 +1,7 @@
 # DeFiVulnLabs
 This was an internal Web3 solidity security training in [XREX](https://xrex.io/). I want to share these materials with everyone interested in Web3 security and how to find vulnerabilities in code and exploit them. Every vulnerability testing uses Foundry. Faster and easier!
 
-Currently supports 38 types of vulnerabilities.
+Currently supports 39 types of vulnerabilities.
 
 **Disclaimer:** This is solely a proof of concept of common smart contract vulnerabilities and is intended only for educational purposes.
 
@@ -101,7 +101,7 @@ Currently supports 38 types of vulnerabilities.
 * [Struct Deletion Oversight](src/test/Struct-deletion.sol) : 
   * Incomplete struct deletion leaves residual data. If you delete a struct containing a mapping, the mapping won't be deleted.[REF](https://twitter.com/1nf0s3cpt/status/1676836264245592065)
 * [Array Deletion Oversight](src/test/Array-deletion.sol) : 
-  * Incorrect array deletion leads to data inconsistency. [REF](https://twitter.com/1nf0s3cpt/status/1676836264245592065)
+  * Incorrect array deletion leads to data inconsistency. [REF](https://twitter.com/1nf0s3cpt/status/1677167550277509120)
     
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
