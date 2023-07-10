@@ -104,7 +104,9 @@ Currently supports 40 types of vulnerabilities.
   * Incorrect array deletion leads to data inconsistency. [REF](https://twitter.com/1nf0s3cpt/status/1677167550277509120)
 * [txGasPrice manipulation](src/test/gas-price.sol) : 
   * Manipulation of the txGasPrice value, which can result in unintended consequences and potential financial losses. [REF](https://twitter.com/1nf0s3cpt/status/1678268482641870849)
-  
+* [Return vs break](src/test/return-break.sol) : 
+  * Use of return in inner loop iteration leads to unintended termination. [REF](https://twitter.com/1nf0s3cpt/status/1678268482641870849)
+ 
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
 #### Bounty: $250K [POC](https://github.com/sherlock-protocol/bug-poc/) | [Reference](https://mirror.xyz/0xE400820f3D60d77a3EC8018d44366ed0d334f93C/LOZF1YBcH1eBdxlC6HP223cAMeTpNgQ-Kc4EjQuxmGA)
