@@ -105,7 +105,7 @@ Currently supports 41 types of vulnerabilities.
 * [txGasPrice manipulation](src/test/gas-price.sol) : 
   * Manipulation of the txGasPrice value, which can result in unintended consequences and potential financial losses. [REF](https://twitter.com/1nf0s3cpt/status/1678268482641870849)
 * [Return vs break](src/test/return-break.sol) : 
-  * Use of return in inner loop iteration leads to unintended termination. [REF](https://twitter.com/1nf0s3cpt/status/1678268482641870849)
+  * Use of return in inner loop iteration leads to unintended termination. [REF](https://twitter.com/1nf0s3cpt/status/1678596730865221632)
  
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
