@@ -17,6 +17,7 @@ Option2: By shifting them from right to left.
 
 REF:
 https://blog.solidityscan.com/improper-array-deletion-82672eed8e8d
+https://github.com/sherlock-audit/2023-03-teller-judging/issues/88
 */
 
 contract ContractTest is Test {
