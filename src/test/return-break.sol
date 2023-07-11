@@ -10,8 +10,6 @@ BankContractBug's addBanks function exhibits an incorrect usage of the return st
 resulting in unintended termination of the loop. The return statement is placed inside the inner loop, 
 causing premature exit from the function before completing the iteration over all bank addresses. 
 
-use break instead of return
-
 Mitigation  
 Use break instead of return
 
