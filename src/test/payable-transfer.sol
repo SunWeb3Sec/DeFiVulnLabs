@@ -4,11 +4,16 @@ pragma solidity ^0.8.15;
 import "forge-std/Test.sol";
 
 /*
-
 Demo: Incorrect use of payable.transfer()
-uses Solidity’s transfer() when transferring ETH to the recipients. 
-This has some notable shortcomings when the recipient is a smart contract, 
-which can render ETH impossible to transfer.
+After the implementation of EIP 1884 in the Istanbul hard fork, 
+the gas cost of the SLOAD operation was increased, 
+resulting in the breaking of some existing smart contracts.
+
+When transferring ETH to recipients, if Solidity's transfer() or send() method 
+is used, certain shortcomings arise, particularly when the recipient 
+is a smart contract. These shortcomings can make it impossible to 
+successfully transfer ETH to the smart contract recipient.
+
 Specifically, the transfer will inevitably fail when the smart contract:
     1.does not implement a payable fallback function, or
     2.implements a payable fallback function which would incur more than 2300 gas units, or
@@ -47,12 +52,12 @@ function testCall() public {
     FixedSimpleBankContract.withdraw(1 ether);  
     }
 
+
     receive() payable external{
         //just a example for out of gas
         SimpleBankContract.deposit{value: 1 ether}();  
     }
 }
-
 contract SimpleBank {
     mapping (address => uint) private balances;
 
