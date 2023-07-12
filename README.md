@@ -106,7 +106,7 @@ Currently supports 41 types of vulnerabilities.
   * Manipulation of the txGasPrice value, which can result in unintended consequences and potential financial losses. [REF](https://twitter.com/1nf0s3cpt/status/1678268482641870849)
 * [Return vs break](src/test/return-break.sol) : 
   * Use of return in inner loop iteration leads to unintended termination. [REF](https://twitter.com/1nf0s3cpt/status/1678596730865221632)
-* [Incorrect use of payable.transfer()](src/test/payable-transfer.sol) : 
+* [Incorrect use of payable.transfer() or send()](src/test/payable-transfer.sol) : 
   * These shortcomings can make it impossible to successfully transfer ETH to the smart contract recipient. [REF](https://twitter.com/1nf0s3cpt/status/1678596730865221632)
   * 
 ## Bug Reproduce
