@@ -1,7 +1,7 @@
 # DeFiVulnLabs
 This was an internal Web3 solidity security training in [XREX](https://xrex.io/). I want to share these materials with everyone interested in Web3 security and how to find vulnerabilities in code and exploit them. Every vulnerability testing uses Foundry. Faster and easier!
 
-Currently supports 41 types of vulnerabilities.
+Currently supports 43 types of vulnerabilities.
 
 **Disclaimer:** This is solely a proof of concept of common smart contract vulnerabilities and is intended only for educational purposes.
 
@@ -109,7 +109,7 @@ Currently supports 41 types of vulnerabilities.
 * [Incorrect use of payable.transfer() or send()](src/test/payable-transfer.sol) : 
   * Fixed 2300 gas, these shortcomings can make it impossible to successfully transfer ETH to the smart contract recipient. [REF](https://twitter.com/1nf0s3cpt/status/1678958093273829376)
 * [Unauthorized NFT Transfer in custom ERC721 implementation](src/test/NFT-transfer.sol) : 
-  * Custom transferFrom function in contract VulnerableERC721, does not properly check if msg.sender is the current owner of the token or an approved address. [REF](https://twitter.com/1nf0s3cpt/status/1678958093273829376)
+  * Custom transferFrom function in contract VulnerableERC721, does not properly check if msg.sender is the current owner of the token or an approved address. [REF](https://twitter.com/1nf0s3cpt/status/1679120390281412609)
    
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
