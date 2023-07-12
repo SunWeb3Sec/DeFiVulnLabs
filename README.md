@@ -107,7 +107,7 @@ Currently supports 41 types of vulnerabilities.
 * [Return vs break](src/test/return-break.sol) : 
   * Use of return in inner loop iteration leads to unintended termination. [REF](https://twitter.com/1nf0s3cpt/status/1678596730865221632)
 * [Incorrect use of payable.transfer() or send()](src/test/payable-transfer.sol) : 
-  * Fixed 2300 gas, these shortcomings can make it impossible to successfully transfer ETH to the smart contract recipient. [REF](https://twitter.com/1nf0s3cpt/status/1678596730865221632)
+  * Fixed 2300 gas, these shortcomings can make it impossible to successfully transfer ETH to the smart contract recipient. [REF](https://twitter.com/1nf0s3cpt/status/1678958093273829376)
     
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
