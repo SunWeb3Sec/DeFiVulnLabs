@@ -110,6 +110,8 @@ Currently supports 43 types of vulnerabilities.
   * Fixed 2300 gas, these shortcomings can make it impossible to successfully transfer ETH to the smart contract recipient. [REF](https://twitter.com/1nf0s3cpt/status/1678958093273829376)
 * [Unauthorized NFT Transfer in custom ERC721 implementation](src/test/NFT-transfer.sol) : 
   * Custom transferFrom function in contract VulnerableERC721, does not properly check if msg.sender is the current owner of the token or an approved address. [REF](https://twitter.com/1nf0s3cpt/status/1679120390281412609)
+* [Missing Check for Self-Transfer Allows Funds to be Lost](src/test/self-transfer.sol) : 
+  * The vulnerability in the code stems from the absence of a check to prevent self-transfers. [REF](https://twitter.com/1nf0s3cpt/status/1679373800327241728)
    
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
