@@ -112,7 +112,9 @@ Currently supports 44 types of vulnerabilities.
   * Custom transferFrom function in contract VulnerableERC721, does not properly check if msg.sender is the current owner of the token or an approved address. [REF](https://twitter.com/1nf0s3cpt/status/1679120390281412609)
 * [Missing Check for Self-Transfer Allows Funds to be Lost](src/test/self-transfer.sol) : 
   * The vulnerability in the code stems from the absence of a check to prevent self-transfers. [REF](https://twitter.com/1nf0s3cpt/status/1679373800327241728)
-   
+* [Incorrect implementation of the recoverERC20() function in the StakingRewards](src/test/recoverERC20.sol) : 
+  * The recoverERC20() function in StakingRewards.sol can potentially serve as a backdoor for the owner to retrieve rewardsToken. [REF](https://twitter.com/1nf0s3cpt/status/1679373800327241728)
+     
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
 #### Bounty: $250K [POC](https://github.com/sherlock-protocol/bug-poc/) | [Reference](https://mirror.xyz/0xE400820f3D60d77a3EC8018d44366ed0d334f93C/LOZF1YBcH1eBdxlC6HP223cAMeTpNgQ-Kc4EjQuxmGA)
