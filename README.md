@@ -113,7 +113,7 @@ Currently supports 44 types of vulnerabilities.
 * [Missing Check for Self-Transfer Allows Funds to be Lost](src/test/self-transfer.sol) : 
   * The vulnerability in the code stems from the absence of a check to prevent self-transfers. [REF](https://twitter.com/1nf0s3cpt/status/1679373800327241728)
 * [Incorrect implementation of the recoverERC20() function in the StakingRewards](src/test/recoverERC20.sol) : 
-  * The recoverERC20() function in StakingRewards.sol can potentially serve as a backdoor for the owner to retrieve rewardsToken. [REF](https://twitter.com/1nf0s3cpt/status/1679373800327241728)
+  * The recoverERC20() function in StakingRewards.sol can potentially serve as a backdoor for the owner to retrieve rewardsToken. [REF](https://twitter.com/1nf0s3cpt/status/1680806251482189824)
      
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
