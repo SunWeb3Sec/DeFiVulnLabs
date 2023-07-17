@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 Demo: Incorrect implementation of the recoverERC20() function in the StakingRewards
 
 The recoverERC20() function in StakingRewards.sol can potentially serve as a backdoor for the owner to retrieve rewardsToken.
-While StakingRewards.recoverERC20 correctly checks against the stakingToken being swept away, there is no corresponding check against the rewardsToken. This creates an administrative privilege where the owner can sweep the rewards tokens, potentially using it as a means to exploit depositors.
+There is no corresponding check against the rewardsToken. This creates an administrative privilege where the owner can sweep the rewards tokens, potentially using it as a means to exploit depositors.
 It's similar to a forked issue if you forked vulnerable code.
  
 Mitigation  
@@ -60,13 +60,13 @@ function testFixedStakingRewards() public {
 contract VulnStakingRewards {
     using SafeERC20 for IERC20;
 
-    IERC20 public stakingToken;
+    IERC20 public rewardsToken;
     address public owner;
 
     event Recovered(address token, uint256 amount);
 
-    constructor(address _stakingToken) {
-        stakingToken = IERC20(_stakingToken);
+    constructor(address _rewardsToken) {
+        rewardsToken = IERC20(_rewardsToken);
         owner = msg.sender;
     }
 
@@ -87,13 +87,13 @@ contract VulnStakingRewards {
 contract FixedtakingRewards {
     using SafeERC20 for IERC20;
 
-    IERC20 public stakingToken;
+    IERC20 public rewardsToken;
     address public owner;
 
     event Recovered(address token, uint256 amount);
 
-    constructor(address _stakingToken) {
-        stakingToken = IERC20(_stakingToken);
+    constructor(address _rewardsToken) {
+        rewardsToken = IERC20(_rewardsToken);
         owner = msg.sender;
     }
 
@@ -107,8 +107,8 @@ contract FixedtakingRewards {
         onlyOwner
     {
         require(
-            tokenAddress != address(stakingToken),
-            "Cannot withdraw the staking token"
+            tokenAddress != address(rewardsToken),
+            "Cannot withdraw the rewardsToken"
         );
         IERC20(tokenAddress).safeTransfer(owner, tokenAmount);
         emit Recovered(tokenAddress, tokenAmount);
