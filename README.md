@@ -115,7 +115,7 @@ Currently supports 46 types of vulnerabilities.
 * [Incorrect implementation of the recoverERC20() function in the StakingRewards](src/test/recoverERC20.sol) : 
   * The recoverERC20() function in StakingRewards.sol can potentially serve as a backdoor for the owner to retrieve rewardsToken. [REF](https://twitter.com/1nf0s3cpt/status/1680806251482189824)
 * [Missing flash loan initiator check](src/test/Flashloan-flaw.sol) : 
-  * Missing flash loan initiator check refers to a potential security vulnerability in a flash loan implementation. [REF](https://twitter.com/1nf0s3cpt/status/1680806251482189824)
+  * Missing flash loan initiator check refers to a potential security vulnerability in a flash loan implementation. [REF](https://twitter.com/1nf0s3cpt/status/1681148319551340545)
        
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
