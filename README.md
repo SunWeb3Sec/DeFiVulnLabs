@@ -117,7 +117,7 @@ Currently supports 47 types of vulnerabilities.
 * [Missing flash loan initiator check](src/test/Flashloan-flaw.sol) : 
   * Missing flash loan initiator check refers to a potential security vulnerability in a flash loan implementation. [REF](https://twitter.com/1nf0s3cpt/status/1681148319551340545)
 * [Incorrect sanity checks - Multiple Unlocks Before Lock Time Elapse](src/test/Incorrect_sanity_checks.sol) : 
-  * This allows tokens to be unlocked multiple times before the lock period has elapsed, potentially leading to significant financial loss. [REF](https://twitter.com/1nf0s3cpt/status/1681148319551340545)
+  * This allows tokens to be unlocked multiple times before the lock period has elapsed, potentially leading to significant financial loss. [REF](https://twitter.com/1nf0s3cpt/status/1681492477281468420)
           
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
