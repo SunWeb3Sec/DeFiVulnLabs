@@ -18,7 +18,7 @@ contract MyERC777 is ERC777 , Test{
         bytes memory userData,
         bytes memory operatorData
     ) public returns (bool) {
-        require(maxMints >= totalSupply());  // Limit the number of mints to 1000.
+        require(maxMints >= (totalSupply() + amount));  // Limit the number of mints to 1000.
         _mint(account, amount, userData, operatorData);
         return true;
     } 
