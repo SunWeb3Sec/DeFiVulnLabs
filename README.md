@@ -1,7 +1,7 @@
 # DeFiVulnLabs
 This was an internal Web3 solidity security training in [XREX](https://xrex.io/). I want to share these materials with everyone interested in Web3 security and how to find vulnerabilities in code and exploit them. Every vulnerability testing uses Foundry. Faster and easier!
 
-Currently supports 46 types of vulnerabilities.
+Currently supports 47 types of vulnerabilities.
 
 **Disclaimer:** This is solely a proof of concept of common smart contract vulnerabilities and is intended only for educational purposes.
 
@@ -116,7 +116,9 @@ Currently supports 46 types of vulnerabilities.
   * The recoverERC20() function in StakingRewards.sol can potentially serve as a backdoor for the owner to retrieve rewardsToken. [REF](https://twitter.com/1nf0s3cpt/status/1680806251482189824)
 * [Missing flash loan initiator check](src/test/Flashloan-flaw.sol) : 
   * Missing flash loan initiator check refers to a potential security vulnerability in a flash loan implementation. [REF](https://twitter.com/1nf0s3cpt/status/1681148319551340545)
-       
+* [Incorrect sanity checks - Multiple Unlocks Before Lock Time Elapse](src/test/Incorrect_sanity_checks.sol) : 
+  * This allows tokens to be unlocked multiple times before the lock period has elapsed, potentially leading to significant financial loss. [REF](https://twitter.com/1nf0s3cpt/status/1681148319551340545)
+          
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
 #### Bounty: $250K [POC](https://github.com/sherlock-protocol/bug-poc/) | [Reference](https://mirror.xyz/0xE400820f3D60d77a3EC8018d44366ed0d334f93C/LOZF1YBcH1eBdxlC6HP223cAMeTpNgQ-Kc4EjQuxmGA)
