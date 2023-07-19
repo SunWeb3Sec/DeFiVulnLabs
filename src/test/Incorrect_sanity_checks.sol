@@ -5,7 +5,7 @@ import "forge-std/Test.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 /*
-Demo: Incorrect sanity checks - Multiple Unlocks Before Lock Time Elapse0 
+Demo: Incorrect sanity checks - Multiple Unlocks Before Lock Time Elapse 
 
 The bug lies in the unlockToken function, which lacks a check to ensure that block.timestamp is larger than locktime. 
 This allows tokens to be unlocked multiple times before the lock period has elapsed, 
