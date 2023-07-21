@@ -83,7 +83,6 @@ contract MyERC777 is ERC777 {
     constructor(
         uint256 initialSupply
     ) ERC777("Gold", "GLD", new address[](0)) {}
-
     function mint(
         address account,
         uint256 amount,
@@ -111,9 +110,12 @@ contract SimpleBank is Test {
             )
         );
     }
+    constructor(address nftAddress) {
+        token = ERC777(nftAddress);
 
     constructor(address nftAddress) {
         token = ERC777(nftAddress);
+
 
         // Register IERC1820Registry
         IERC1820Registry registry = IERC1820Registry(
@@ -147,6 +149,5 @@ contract SimpleBank is Test {
         bytes calldata data,
         bytes calldata operatorData
     ) external {}
-
     receive() external payable {}
 }
