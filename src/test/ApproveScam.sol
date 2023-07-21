@@ -1,35 +1,42 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.15;
+pragma solidity ^0.8.18;
 
 import "forge-std/Test.sol";
 
 contract ContractTest is Test {
-        ERC20 ERC20Contract;
-        address alice = vm.addr(1);
-        address eve = vm.addr(2);
+    ERC20 ERC20Contract;
+    address alice = vm.addr(1);
+    address eve = vm.addr(2);
 
-function testApproveScam() public {
- 
-    ERC20Contract = new ERC20();
-    ERC20Contract.mint(1000);
-    ERC20Contract.transfer(address(alice),1000);
+    function testApproveScam() public {
+        ERC20Contract = new ERC20();
+        ERC20Contract.mint(1000);
+        ERC20Contract.transfer(address(alice), 1000);
 
-    vm.prank(alice);
-    // Be Careful to grant unlimited amount to unknown website/address.
-    // Do not perform approve, if you are sure it's from a legitimate website.
-    // Alice granted approval permission to Eve.
-    ERC20Contract.approve(address(eve),type(uint256).max);
+        vm.prank(alice);
+        // Be Careful to grant unlimited amount to unknown website/address.
+        // Do not perform approve, if you are sure it's from a legitimate website.
+        // Alice granted approval permission to Eve.
+        ERC20Contract.approve(address(eve), type(uint256).max);
 
-    console.log("Before exploiting, Balance of Eve:",ERC20Contract.balanceOf(eve));
-    console.log("Due to Alice granted transfer permission to Eve, now Eve can move funds from Alice");
-    vm.prank(eve);
-    // Now, Eve can move funds from Alice.
-    ERC20Contract.transferFrom(address(alice),address(eve),1000);
-    console.log("After exploiting, Balance of Eve:",ERC20Contract.balanceOf(eve));
-    console.log("Exploit completed");
-
+        console.log(
+            "Before exploiting, Balance of Eve:",
+            ERC20Contract.balanceOf(eve)
+        );
+        console.log(
+            "Due to Alice granted transfer permission to Eve, now Eve can move funds from Alice"
+        );
+        vm.prank(eve);
+        // Now, Eve can move funds from Alice.
+        ERC20Contract.transferFrom(address(alice), address(eve), 1000);
+        console.log(
+            "After exploiting, Balance of Eve:",
+            ERC20Contract.balanceOf(eve)
+        );
+        console.log("Exploit completed");
     }
-  receive() payable external{}
+
+    receive() external payable {}
 }
 
 interface IERC20 {
@@ -39,7 +46,10 @@ interface IERC20 {
 
     function transfer(address recipient, uint amount) external returns (bool);
 
-    function allowance(address owner, address spender) external view returns (uint);
+    function allowance(
+        address owner,
+        address spender
+    ) external view returns (uint);
 
     function approve(address spender, uint amount) external returns (bool);
 

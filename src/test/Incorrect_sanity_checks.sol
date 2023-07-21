@@ -1,9 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.15;
+pragma solidity ^0.8.18;
 
 import "forge-std/Test.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+
 /*
 Demo: Incorrect sanity checks - Multiple Unlocks Before Lock Time Elapse 
 
@@ -26,50 +27,75 @@ https://blog.decurity.io/dx-protocol-vulnerability-disclosure-bddff88aeb1d
 */
 
 contract ContractTest is Test {
-        VulnerableBank VulnerableBankContract;
-        BanksLP BanksLPContract;
-        FixedeBank FixedeBankContract;
-        address alice = vm.addr(1);
- 
-function setUp() public { 
+    VulnerableBank VulnerableBankContract;
+    BanksLP BanksLPContract;
+    FixedeBank FixedeBankContract;
+    address alice = vm.addr(1);
+
+    function setUp() public {
         VulnerableBankContract = new VulnerableBank();
         FixedeBankContract = new FixedeBank();
         BanksLPContract = new BanksLP();
-        BanksLPContract.transfer(address(alice),10000);
-        BanksLPContract.transfer(address(VulnerableBankContract),100000);
+        BanksLPContract.transfer(address(alice), 10000);
+        BanksLPContract.transfer(address(VulnerableBankContract), 100000);
     }
 
-function testVulnerableBank() public {
+    function testVulnerableBank() public {
         //In foundry, default timestamp is 1.
-        console.log("Current timestamp",block.timestamp);
+        console.log("Current timestamp", block.timestamp);
         vm.startPrank(alice);
-        BanksLPContract.approve(address(VulnerableBankContract),10000);
-        console.log("Before locking, my BanksLP balance",BanksLPContract.balanceOf(address(alice)));
+        BanksLPContract.approve(address(VulnerableBankContract), 10000);
+        console.log(
+            "Before locking, my BanksLP balance",
+            BanksLPContract.balanceOf(address(alice))
+        );
         //lock 10000 for a day
-        VulnerableBankContract.createLocker(address(BanksLPContract),10000,86400);
-        console.log("Before exploiting, my BanksLP balance",BanksLPContract.balanceOf(address(alice)));
+        VulnerableBankContract.createLocker(
+            address(BanksLPContract),
+            10000,
+            86400
+        );
+        console.log(
+            "Before exploiting, my BanksLP balance",
+            BanksLPContract.balanceOf(address(alice))
+        );
         //vm.warp(88888);
         //exploit it,
         for (uint i = 0; i < 10; i++) {
             VulnerableBankContract.unlockToken(1);
         }
-        console.log("After exploiting, my BanksLP balance",BanksLPContract.balanceOf(address(alice)));
+        console.log(
+            "After exploiting, my BanksLP balance",
+            BanksLPContract.balanceOf(address(alice))
+        );
     }
 
-function testFixedBank() public {
+    function testFixedBank() public {
         //In foundry, default timestamp is 1.
-        console.log("Current timestamp",block.timestamp);
+        console.log("Current timestamp", block.timestamp);
         vm.startPrank(alice);
-        BanksLPContract.approve(address(FixedeBankContract),10000);
-        console.log("Before locking, my BanksLP balance",BanksLPContract.balanceOf(address(alice)));
+        BanksLPContract.approve(address(FixedeBankContract), 10000);
+        console.log(
+            "Before locking, my BanksLP balance",
+            BanksLPContract.balanceOf(address(alice))
+        );
         //lock 10000 for a day
-        FixedeBankContract.createLocker(address(BanksLPContract),10000,86400);
-        console.log("Before exploiting, my BanksLP balance",BanksLPContract.balanceOf(address(alice)));
+        FixedeBankContract.createLocker(address(BanksLPContract), 10000, 86400);
+        console.log(
+            "Before exploiting, my BanksLP balance",
+            BanksLPContract.balanceOf(address(alice))
+        );
         //exploit it, failed.
         for (uint i = 0; i < 10; i++) {
-            FixedeBankContract.unlockToken(1);
+            {
+                vm.expectRevert();
+                FixedeBankContract.unlockToken(1);
+            }
         }
-        console.log("After exploiting, my BanksLP balance",BanksLPContract.balanceOf(address(alice)));
+        console.log(
+            "After exploiting, my BanksLP balance",
+            BanksLPContract.balanceOf(address(alice))
+        );
     }
 }
 
@@ -84,10 +110,17 @@ contract VulnerableBank {
     mapping(address => mapping(uint256 => Locker)) private _unlockToken;
     uint256 private _nextLockerId = 1;
 
-    function createLocker(address tokenAddress, uint256 amount, uint256 lockTime) public {
+    function createLocker(
+        address tokenAddress,
+        uint256 amount,
+        uint256 lockTime
+    ) public {
         require(amount > 0, "Amount must be greater than 0");
         require(lockTime > block.timestamp, "Lock time must be in the future");
-        require(IERC20(tokenAddress).balanceOf(msg.sender) >= amount, "Insufficient token balance");
+        require(
+            IERC20(tokenAddress).balanceOf(msg.sender) >= amount,
+            "Insufficient token balance"
+        );
 
         // Transfer the tokens to this contract
         IERC20(tokenAddress).transferFrom(msg.sender, address(this), amount);
@@ -141,10 +174,17 @@ contract FixedeBank {
     mapping(address => mapping(uint256 => Locker)) private _unlockToken;
     uint256 private _nextLockerId = 1;
 
-    function createLocker(address tokenAddress, uint256 amount, uint256 lockTime) public {
+    function createLocker(
+        address tokenAddress,
+        uint256 amount,
+        uint256 lockTime
+    ) public {
         require(amount > 0, "Amount must be greater than 0");
         require(lockTime > block.timestamp, "Lock time must be in the future");
-        require(IERC20(tokenAddress).balanceOf(msg.sender) >= amount, "Insufficient token balance");
+        require(
+            IERC20(tokenAddress).balanceOf(msg.sender) >= amount,
+            "Insufficient token balance"
+        );
 
         // Transfer the tokens to this contract
         IERC20(tokenAddress).transferFrom(msg.sender, address(this), amount);
@@ -173,6 +213,5 @@ contract FixedeBank {
 
         // Transfer tokens to the locker owner
         IERC20(locker.tokenAddress).transfer(msg.sender, amount);
-
     }
 }

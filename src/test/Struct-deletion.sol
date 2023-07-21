@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.15;
+pragma solidity ^0.8.18;
 
 import "forge-std/Test.sol";
 
@@ -23,30 +23,29 @@ https://docs.soliditylang.org/en/develop/types.html
 */
 
 contract ContractTest is Test {
-        StructDeletionBug StructDeletionBugContract;
-        FixedStructDeletion FixedStructDeletionContract;
- 
-function setUp() public { 
+    StructDeletionBug StructDeletionBugContract;
+    FixedStructDeletion FixedStructDeletionContract;
+
+    function setUp() public {
         StructDeletionBugContract = new StructDeletionBug();
         FixedStructDeletionContract = new FixedStructDeletion();
     }
 
-function testStructDeletion() public {
-    StructDeletionBugContract.addStruct(10,10);
-    StructDeletionBugContract.getStruct(10,10);
-    StructDeletionBugContract.deleteStruct(10);
-    StructDeletionBugContract.getStruct(10,10);
+    function testStructDeletion() public {
+        StructDeletionBugContract.addStruct(10, 10);
+        StructDeletionBugContract.getStruct(10, 10);
+        StructDeletionBugContract.deleteStruct(10);
+        StructDeletionBugContract.getStruct(10, 10);
     }
 
-
-function testFixedStructDeletion() public {
-    FixedStructDeletionContract.addStruct(10,10);
-    FixedStructDeletionContract.getStruct(10,10);
-    FixedStructDeletionContract.deleteStruct(10);
-    FixedStructDeletionContract.getStruct(10,10);
+    function testFixedStructDeletion() public {
+        FixedStructDeletionContract.addStruct(10, 10);
+        FixedStructDeletionContract.getStruct(10, 10);
+        FixedStructDeletionContract.deleteStruct(10);
+        FixedStructDeletionContract.getStruct(10, 10);
     }
 
-    receive() payable external{}
+    receive() external payable {}
 }
 
 contract StructDeletionBug {
@@ -61,12 +60,14 @@ contract StructDeletionBug {
         MyStruct storage newStruct = myStructs[structId];
         newStruct.id = structId;
         newStruct.flags[flagKeys] = true;
-
     }
 
-    function getStruct(uint256 structId, uint256 flagKeys) public view returns (uint256, bool ) {
+    function getStruct(
+        uint256 structId,
+        uint256 flagKeys
+    ) public view returns (uint256, bool) {
         MyStruct storage myStruct = myStructs[structId];
-        bool keys = myStruct.flags[flagKeys] ;
+        bool keys = myStruct.flags[flagKeys];
         return (myStruct.id, keys);
     }
 
@@ -88,18 +89,20 @@ contract FixedStructDeletion {
         MyStruct storage newStruct = myStructs[structId];
         newStruct.id = structId;
         newStruct.flags[flagKeys] = true;
-
     }
 
-    function getStruct(uint256 structId, uint256 flagKeys) public view returns (uint256, bool ) {
+    function getStruct(
+        uint256 structId,
+        uint256 flagKeys
+    ) public view returns (uint256, bool) {
         MyStruct storage myStruct = myStructs[structId];
-        bool keys = myStruct.flags[flagKeys] ;
+        bool keys = myStruct.flags[flagKeys];
         return (myStruct.id, keys);
     }
 
     function deleteStruct(uint256 structId) public {
         MyStruct storage myStruct = myStructs[structId];
-				// Check if all flags are deleted, then delete the mapping
+        // Check if all flags are deleted, then delete the mapping
         for (uint256 i = 0; i < 15; i++) {
             delete myStruct.flags[i];
         }

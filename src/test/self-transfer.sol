@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.15;
+pragma solidity ^0.8.18;
 
 import "forge-std/Test.sol";
+
 /*
 Demo: Missing Check for Self-Transfer Allows Funds to be Lost
 
@@ -22,18 +23,17 @@ https://www.immunebytes.com/blog/bzxs-security-focused-relaunch-followed-by-a-ha
 */
 
 contract ContractTest is Test {
-        SimpleBank VSimpleBankContract;
-        FixedSimpleBank FixedSimpleBankContract;
- 
-function setUp() public { 
+    SimpleBank VSimpleBankContract;
+    FixedSimpleBank FixedSimpleBankContract;
+
+    function setUp() public {
         VSimpleBankContract = new SimpleBank();
         FixedSimpleBankContract = new FixedSimpleBank();
-
     }
 
-function testSelfTransfer() public {
-        VSimpleBankContract.transfer(address(this),address(this),10000);
-        VSimpleBankContract.transfer(address(this),address(this),10000);
+    function testSelfTransfer() public {
+        VSimpleBankContract.transfer(address(this), address(this), 10000);
+        VSimpleBankContract.transfer(address(this), address(this), 10000);
         VSimpleBankContract.balanceOf(address(this));
         /*
         unchecked {
@@ -44,12 +44,12 @@ function testSelfTransfer() public {
         */
     }
 
-function testFixedSelfTransfer() public {
-        FixedSimpleBankContract.transfer(address(this),address(this),10000);
+    function testFixedSelfTransfer() public {
+        vm.expectRevert("Cannot transfer funds to the same address.");
+        FixedSimpleBankContract.transfer(address(this), address(this), 10000);
     }
 
-
-    receive() payable external{}
+    receive() external payable {}
 }
 
 contract SimpleBank {
@@ -59,11 +59,8 @@ contract SimpleBank {
         return _balances[_account];
     }
 
-    function transfer(
-        address _from,
-        address _to,
-        uint256 _amount
-    ) public {
+    function transfer(address _from, address _to, uint256 _amount) public {
+        // not check self-transfer
         uint256 _fromBalance = _balances[_from];
         uint256 _toBalance = _balances[_to];
 
@@ -81,11 +78,7 @@ contract FixedSimpleBank {
         return _balances[_account];
     }
 
-    function transfer(
-        address _from,
-        address _to,
-        uint256 _amount
-    ) public {
+    function transfer(address _from, address _to, uint256 _amount) public {
         //Mitigation
         require(_from != _to, "Cannot transfer funds to the same address.");
 
@@ -95,11 +88,11 @@ contract FixedSimpleBank {
         unchecked {
             _balances[_from] = _fromBalance - _amount;
             _balances[_to] = _toBalance + _amount;
-        /*
-        Another mitigation
-        _balances[_id][_from] -= _amount;
-        _balances[_id][_to] += _amount;
-        */
+            /*
+            Another mitigation
+            _balances[_id][_from] -= _amount;
+            _balances[_id][_to] += _amount;
+            */
         }
     }
 }

