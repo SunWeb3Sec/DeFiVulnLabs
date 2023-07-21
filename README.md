@@ -1,9 +1,9 @@
 # DeFiVulnLabs
 This was an internal Web3 solidity security training in [XREX](https://xrex.io/). I want to share these materials with everyone interested in Web3 security and how to find vulnerabilities in code and exploit them. Every vulnerability testing uses Foundry. Faster and easier!
 
-Currently supports 47 types of vulnerabilities.
+Currently supports 47 types of vulnerabilities. it compiles with Solidity 0.8.18 except the cases like overflow, underflow where we need older solidity to reproduce the bug.
 
-**Disclaimer:** This is solely a proof of concept of common smart contract vulnerabilities and is intended only for educational purposes.
+**Disclaimer:** This content serves solely as a proof of concept showcasing Solidity common bugs. It is strictly intended for educational purposes and should not be interpreted as encouraging or endorsing any form of illegal activities or actual hacking attempts. The provided information is for informational and learning purposes only, and any actions taken based on this content are solely the responsibility of the individual. The usage of this information should adhere to applicable laws, regulations, and ethical standards.
 
 ## Getting Started
 
@@ -27,7 +27,7 @@ Currently supports 47 types of vulnerabilities.
   * An external call from a secure smart contract "A" invokes the fallback() function in the attacker's contract. The attacker executes the code in the fallback() function to run against a target contract "B", which some how indirectly related to contract "A". 
   * In the given example, Contract "B" derives the price of the LP token from Contract "A"
 * [ERC777 callbacks and reentrancy](src/test/ERC777-reentrancy.sol) : 
-  * ERC777 tokens allow arbitrary callbacks via hooks that are called during token transfers. Malicious contract addresses may cause reentrancy on such callbacks if reentrancy guards are not used. [REF1](https://medium.com/cream-finance/c-r-e-a-m-finance-post-mortem-amp-exploit-6ceb20a630c5), [REF2](https://quantstamp.com/blog/how-the-dforce-hacker-used-reentrancy-to-steal-25-million), [Cream POC](https://github.com/SunWeb3Sec/DeFiHackLabs#20210830-cream-finance---flashloan-attack--reentrancy)
+  * ERC777 tokens allow arbitrary callbacks via hooks that are called during token transfers. Malicious contract addresses may cause reentrancy on such callbacks if reentrancy guards are not used. [REF1](https://medium.com/cream-finance/c-r-e-a-m-finance-post-mortem-amp-exploit-6ceb20a630c5), [REF2](https://quantstamp.com/blog/how-the-dforce-hacker-used-reentrancy-to-steal-25-million), [Cream POC](https://github.com/SunWeb3Sec/DeFiHackLabs/tree/main/past/2021#20210830-cream-finance---flashloan-attack--reentrancy)
   * [ERC667 reentrancy](https://github.com/SunWeb3Sec/DeFiHackLabs#20220313-hundred-finance---erc667-reentrancy) | [ERC827 reentrancy](https://ethereum-magicians.org/t/erc-827-callbacks-can-lead-to-reentrancy-attack-vectors/660)
 * [Unchecked external call - call injection](src/test/UnsafeCall.sol) : 
   * Use of low level "call" should be avoided whenever possible. If the call data is controllable, it is easy to cause arbitrary function execution.
@@ -157,4 +157,3 @@ https://medium.com/immunefi/sense-finance-access-control-issue-bugfix-review-32e
 * [Secureum Security Pitfalls 201](https://secureum.substack.com/p/security-pitfalls-and-best-practices-201?s=r)
 * [How to Secure Your Smart Contracts: 6 Solidity Vulnerabilities and how to avoid them (Part 1)](https://medium.com/loom-network/how-to-secure-your-smart-contracts-6-solidity-vulnerabilities-and-how-to-avoid-them-part-1-c33048d4d17d)[(Part 2)](https://medium.com/loom-network/how-to-secure-your-smart-contracts-6-solidity-vulnerabilities-and-how-to-avoid-them-part-2-730db0aa4834)
 * [Top 10 DeFi Security Best Practices](https://blog.chain.link/defi-security-best-practices/)
-
