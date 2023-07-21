@@ -1,9 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.15;
+pragma solidity ^0.8.18;
 
 import "forge-std/Test.sol";
 // Import the SafeCast library
 import "@openzeppelin/contracts/utils/math/SafeCast.sol";
+
 /*
 
 Demo:
@@ -20,31 +21,36 @@ https://github.com/sherlock-audit/2022-10-union-finance-judging/issues/96
 */
 
 contract ContractTest is Test {
-        SimpleBank SimpleBankContract;
-        FixedSimpleBank FixedSimpleBankContract;
- 
-function setUp() public { 
+    SimpleBank SimpleBankContract;
+    FixedSimpleBank FixedSimpleBankContract;
 
+    function setUp() public {
         SimpleBankContract = new SimpleBank();
         FixedSimpleBankContract = new FixedSimpleBank();
-
     }
 
-function testUnsafeDowncast() public {
-    SimpleBankContract.deposit(257);  //overflowed
-    assertEq(SimpleBankContract.getBalance(),257);
+    function testUnsafeDowncast() public {
+        SimpleBankContract.deposit(257); //overflowed
+
+        console.log(
+            "balance of SimpleBankContract:",
+            SimpleBankContract.getBalance()
+        );
+
+        // balance is 1, because of overflowed
+        assertEq(SimpleBankContract.getBalance(), 1);
     }
 
-function testsafeDowncast() public {
-    vm.expectRevert("SafeCast: value doesn't fit in 8 bits");
-    FixedSimpleBankContract.deposit(257);  //revert 
+    function testsafeDowncast() public {
+        vm.expectRevert("SafeCast: value doesn't fit in 8 bits");
+        FixedSimpleBankContract.deposit(257); //revert
     }
 
-
-    receive() payable external{}
+    receive() external payable {}
 }
+
 contract SimpleBank {
-    mapping (address => uint) private balances;
+    mapping(address => uint) private balances;
 
     function deposit(uint256 amount) public {
         // Here's the unsafe downcast. If the `amount` is greater than type(uint8).max
@@ -64,8 +70,8 @@ contract SimpleBank {
 contract FixedSimpleBank {
     using SafeCast for uint256; // Use SafeCast for uint256
 
-    mapping (address => uint) private balances;
-    
+    mapping(address => uint) private balances;
+
     function deposit(uint256 _amount) public {
         // Use the `toUint8()` function from `SafeCast` to safely downcast `amount`.
         // If `amount` is greater than `type(uint8).max`, it will revert.
@@ -75,7 +81,7 @@ contract FixedSimpleBank {
         // Store the balance
         balances[msg.sender] = amount;
     }
-    
+
     function getBalance() public view returns (uint) {
         return balances[msg.sender];
     }

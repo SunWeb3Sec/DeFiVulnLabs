@@ -1,43 +1,50 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.15;
+pragma solidity ^0.8.18;
 
 import "forge-std/Test.sol";
- 
+
 contract ContractTest is Test {
-        Logic LogicContract;
-        Proxy ProxyContract;
+    Logic LogicContract;
+    Proxy ProxyContract;
 
-function testStorageCollision() public {
+    function testStorageCollision() public {
+        LogicContract = new Logic();
+        ProxyContract = new Proxy(address(LogicContract));
 
-    LogicContract = new Logic();
-    ProxyContract = new Proxy(address(LogicContract));
-
-    console.log("Current implementation contract address:",ProxyContract.implementation());
-    ProxyContract.testcollision();
-    console.log("Overwrited slot0 implementation contract address:",ProxyContract.implementation());
-    console.log("Exploit completed");
+        console.log(
+            "Current implementation contract address:",
+            ProxyContract.implementation()
+        );
+        ProxyContract.testcollision();
+        console.log(
+            "Overwrited slot0 implementation contract address:",
+            ProxyContract.implementation()
+        );
+        console.log("Exploit completed");
     }
-    receive() payable external{}
+
+    receive() external payable {}
 }
 
 contract Proxy {
-    address public implementation;  //slot0
+    address public implementation; //slot0
 
-    constructor (address _implementation) public {
+    constructor(address _implementation) {
         implementation = _implementation;
     }
 
     function testcollision() public {
-        implementation.delegatecall(
-            abi.encodeWithSignature("foo(address)",address(this))
+        bool success;
+        (success, ) = implementation.delegatecall(
+            abi.encodeWithSignature("foo(address)", address(this))
         );
     }
 }
 
 contract Logic {
     address public GuestAddress; //slot0
-    
-    constructor () public {
+
+    constructor() {
         GuestAddress = address(0x0);
     }
 

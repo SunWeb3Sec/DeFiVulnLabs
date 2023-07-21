@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.7.6;
+// this need to be older version of solidity from 0.8.0 solidty compiler checks for overflow and underflow
 
 import "forge-std/Test.sol";
-
 
 // This contract is designed to act as a time vault.
 // User can deposit into this contract but cannot withdraw for atleast a week.
@@ -36,7 +36,10 @@ contract TimeLock {
 
     function withdraw() public {
         require(balances[msg.sender] > 0, "Insufficient funds");
-        require(block.timestamp > lockTime[msg.sender], "Lock time not expired");
+        require(
+            block.timestamp > lockTime[msg.sender],
+            "Lock time not expired"
+        );
 
         uint amount = balances[msg.sender];
         balances[msg.sender] = 0;
@@ -55,10 +58,10 @@ contract ContractTest is Test {
         TimeLockContract = new TimeLock();
         alice = vm.addr(1);
         bob = vm.addr(2);
-        vm.deal(alice, 1 ether);   
+        vm.deal(alice, 1 ether);
         vm.deal(bob, 1 ether);
-    }    
-           
+    }
+
     function testFailOverflow() public {
         console.log("Alice balance", alice.balance);
         console.log("Bob balance", bob.balance);
@@ -69,7 +72,7 @@ contract ContractTest is Test {
         console.log("Alice balance", alice.balance);
 
         console.log("Bob deposit 1 Ether...");
-        vm.startPrank(bob); 
+        vm.startPrank(bob);
         TimeLockContract.deposit{value: 1 ether}();
         console.log("Bob balance", bob.balance);
 
@@ -78,13 +81,17 @@ contract ContractTest is Test {
             type(uint).max + 1 - TimeLockContract.lockTime(bob)
         );
 
-        console.log("Bob will successfully withdraw, because the lock time is overflowed");
+        console.log(
+            "Bob will successfully withdraw, because the lock time is overflowed"
+        );
         TimeLockContract.withdraw();
         console.log("Bob balance", bob.balance);
         vm.stopPrank();
 
         vm.prank(alice);
-        console.log("Alice will fail to withdraw, because the lock time did not expire");
-        TimeLockContract.withdraw();    // expect revert
+        console.log(
+            "Alice will fail to withdraw, because the lock time did not expire"
+        );
+        TimeLockContract.withdraw(); // expect revert
     }
 }

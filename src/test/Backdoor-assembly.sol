@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.15;
+pragma solidity ^0.8.18;
 
 import "forge-std/Test.sol";
+
 /* 
 Lottery game: anyone can call pickWinner to get prize if you are lucky. 
 Refers to JST contract backdoor. many rugged style's contract has similar pattern.
@@ -15,7 +16,9 @@ contract ContractTest is Test {
         address alice = vm.addr(1);
         address bob = vm.addr(2);
         LotteryGameContract = new LotteryGame();
-        console.log("Alice performs pickWinner, of course she will not be a winner");
+        console.log(
+            "Alice performs pickWinner, of course she will not be a winner"
+        );
         vm.prank(alice);
         LotteryGameContract.pickWinner(address(alice));
         console.log("Prize: ", LotteryGameContract.prize());

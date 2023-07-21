@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.15;
+pragma solidity ^0.8.18;
 
 import "forge-std/Test.sol";
 
@@ -25,19 +25,17 @@ https://dacian.me/precision-loss-errors#heading-rounding-down-to-zero
 */
 
 contract ContractTest is Test {
-        SimplePool SimplePoolContract;
- 
-function setUp() public { 
+    SimplePool SimplePoolContract;
+
+    function setUp() public {
         SimplePoolContract = new SimplePool();
     }
 
-function testRounding_error() public {
-
-    SimplePoolContract.getCurrentReward();
-
+    function testRounding_error() public view {
+        SimplePoolContract.getCurrentReward();
     }
-    
-    receive() payable external{}
+
+    receive() external payable {}
 }
 
 contract SimplePool {
@@ -47,7 +45,7 @@ contract SimplePool {
 
     constructor() {
         totalDebt = 10000e6; //debt token is USDC and has 6 digit decimals.
-        lastAccrueInterestTime = block.timestamp - 1  ;
+        lastAccrueInterestTime = block.timestamp - 1;
         loanTokenBalance = 500e18;
     }
 
@@ -59,17 +57,16 @@ contract SimplePool {
         if (_timeDelta == 0) return 0;
 
         // Calculate the supplied value
-        uint _supplied = totalDebt + loanTokenBalance;
+        // uint _supplied = totalDebt + loanTokenBalance;
         //console.log(_supplied);
         // Calculate the reward
-        uint _reward = (totalDebt * _timeDelta) / (365 days * 1e18);
-        console.log("Current reward",_reward);
-
+        _reward = (totalDebt * _timeDelta) / (365 days * 1e18);
+        console.log("Current reward", _reward);
 
         // 31536000 is the number of seconds in a year
         // 365 days * 1e18 = 31_536_000_000_000_000_000_000_000
-        //_totalDebt * _timeDelta / 31_536_000_000_000_000_000_000_000 
+        //_totalDebt * _timeDelta / 31_536_000_000_000_000_000_000_000
         // 10_000_000_000 * 1 / 31_536_000_000_000_000_000_000_000 // -> 0
-        return _reward;
+        _reward;
     }
 }

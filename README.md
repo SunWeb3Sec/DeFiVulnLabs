@@ -1,7 +1,7 @@
 # DeFiVulnLabs
 This was an internal Web3 solidity security training in [XREX](https://xrex.io/). I want to share these materials with everyone interested in Web3 security and how to find vulnerabilities in code and exploit them. Every vulnerability testing uses Foundry. Faster and easier!
 
-Currently supports 47 types of vulnerabilities.
+Currently supports 47 types of vulnerabilities. it compiles with Solidity 0.8.18 except the cases like overflow, underflow where we need older solidity to reproduce the bug.
 
 **Disclaimer:** This content serves solely as a proof of concept showcasing Solidity common bugs. It is strictly intended for educational purposes and should not be interpreted as encouraging or endorsing any form of illegal activities or actual hacking attempts. The provided information is for informational and learning purposes only, and any actions taken based on this content are solely the responsibility of the individual. The usage of this information should adhere to applicable laws, regulations, and ethical standards.
 
@@ -157,4 +157,3 @@ https://medium.com/immunefi/sense-finance-access-control-issue-bugfix-review-32e
 * [Secureum Security Pitfalls 201](https://secureum.substack.com/p/security-pitfalls-and-best-practices-201?s=r)
 * [How to Secure Your Smart Contracts: 6 Solidity Vulnerabilities and how to avoid them (Part 1)](https://medium.com/loom-network/how-to-secure-your-smart-contracts-6-solidity-vulnerabilities-and-how-to-avoid-them-part-1-c33048d4d17d)[(Part 2)](https://medium.com/loom-network/how-to-secure-your-smart-contracts-6-solidity-vulnerabilities-and-how-to-avoid-them-part-2-730db0aa4834)
 * [Top 10 DeFi Security Best Practices](https://blog.chain.link/defi-security-best-practices/)
-
