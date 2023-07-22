@@ -3,9 +3,37 @@ pragma solidity 0.8.18;
 
 import "forge-std/Test.sol";
 import "./interface.sol";
+/*
+Name: Read-Only Reentrancy Vulnerability
 
-// Video Reference - https://www.youtube.com/watch?v=0fgGTRlsDxI
-// forge test --contracts ./src/test/ReadOnlyReentrancy.sol -vv
+Description:
+The Read-Only Reentrancy Vulnerability is a flaw in smart contract design that allows attackers 
+to exploit the "read-only" nature of a function to make unintended changes to the contract's state. 
+Specifically, the vulnerability arises when an attacker uses the remove_liquidity function of the ICurve contract 
+to trigger the receive function in the ExploitContract. This is achieved by an external call 
+from a secure smart contract "A" invoking the fallback() function in the attacker's contract.
+
+Through this exploit, the attacker gains the ability to execute code within the fallback() function
+against a target contract "B," which is indirectly related to contract "A." Contract "B" derives
+the price of the LP token from Contract "A," making it susceptible to manipulation and unintended price changes
+through the reentrancy attack.
+
+Mitigation:
+Avoid any state-changing operations within functions that are intended to be read-only.
+Makerdao example:
+        // This will revert if called during execution of a state-modifying pool function.
+        if (nonreentrant) {
+            uint256[2] calldata amounts;
+            CurvePoolLike(pool).remove_liquidity(0, amounts);
+        }
+
+REF
+https://twitter.com/1nf0s3cpt/status/1590622114834706432
+https://chainsecurity.com/heartbreaks-curve-lp-oracles/
+https://medium.com/@zokyo.io/read-only-reentrancy-attacks-understanding-the-threat-to-your-smart-contracts-99444c0a7334
+https://www.youtube.com/watch?v=0fgGTRlsDxI
+
+*/
 
 interface ICurve {
     function get_virtual_price() external view returns (uint);
