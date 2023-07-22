@@ -4,7 +4,9 @@ pragma solidity ^0.8.18;
 import "forge-std/Test.sol";
 
 /*
-Demo: Incorrect use of payable.transfer()
+Name: Incorrect use of payable.transfer()
+
+Description:
 After the implementation of EIP 1884 in the Istanbul hard fork, 
 the gas cost of the SLOAD operation was increased, 
 resulting in the breaking of some existing smart contracts.
@@ -19,13 +21,13 @@ Specifically, the transfer will inevitably fail when the smart contract:
     2.implements a payable fallback function which would incur more than 2300 gas units, or
     3.implements a payable fallback function incurring less than 2300 gas units but is called through a proxy that raises the call’s gas usage above 2300.
 
-Mitigation  
+Mitigation:  
 Using call with its returned boolean checked in combination with re-entrancy guard is highly recommended.
 
 REF:
+https://twitter.com/1nf0s3cpt/status/1678958093273829376
 https://consensys.net/diligence/blog/2019/09/stop-using-soliditys-transfer-now/
 https://github.com/code-423n4/2022-12-escher-findings/issues/99
-
 */
 
 contract ContractTest is Test {
