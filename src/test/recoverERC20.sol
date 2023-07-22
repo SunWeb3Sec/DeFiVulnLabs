@@ -7,16 +7,18 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 /*
-Demo: Incorrect implementation of the recoverERC20() function in the StakingRewards
+Name: Incorrect implementation of the recoverERC20() function in the StakingRewards
 
+Description:
 The recoverERC20() function in StakingRewards.sol can potentially serve as a backdoor for the owner to retrieve rewardsToken.
 There is no corresponding check against the rewardsToken. This creates an administrative privilege where the owner can sweep the rewards tokens, potentially using it as a means to exploit depositors.
 It's similar to a forked issue if you forked vulnerable code.
  
-Mitigation  
+Mitigation:  
 disallowing recovery of the rewardToken within the recoverErc20 function
 
 REF:
+https://twitter.com/1nf0s3cpt/status/1680806251482189824
 https://github.com/code-423n4/2022-02-concur-findings/issues/210
 https://github.com/code-423n4/2022-09-y2k-finance-findings/issues/49
 https://github.com/code-423n4/2022-10-paladin-findings/issues/40
