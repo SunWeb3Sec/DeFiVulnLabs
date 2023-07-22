@@ -3,6 +3,21 @@ pragma solidity ^0.8.18;
 
 import "forge-std/Test.sol";
 
+/*
+Name: Private Data Exposure
+
+Description:
+Solidity stores the variables defined in the contract in slots. Each slot can accommodate up to 32 bytes or 256 bits. Given that all data stored on-chain, whether public or private, can be read, it is possible to read private data from the Vault contract by predicting the memory slot where the private data resides.
+
+If the Vault contract is utilized in a production environment, malicious actors could employ similar techniques to access sensitive information such as user passwords.
+Mitigation:
+Avoid storing sensitive data on-chain
+
+REF
+https://quillaudits.medium.com/accessing-private-data-in-smart-contracts-quillaudits-fe847581ce6d
+
+*/
+
 contract ContractTest is Test {
     Vault VaultContract;
 
