@@ -34,7 +34,7 @@ Currently supports 47 types of vulnerabilities. it compiles with Solidity 0.8.18
 * [Private data](src/test/Privatedata.sol) : 
   * Private data ≠ Secure. It's readable from slots of the contract.
   * Because the storage of each smart contract is public and transparent, and the content can be read through the corresponding slot in the specified contract address. Sensitive information is not recommended to be placed in smart contract programs.
-* [Unprotected callback - NFT over mint](src/test/Unprotected-callback.sol) : 
+* [Unprotected callback - ERC721 SafeMint reentrancy](src/test/Unprotected-callback.sol) : 
   * _safeMint is secure? Attacker can reenter the mint function inside the onERC721Received callback.
 * [Backdoor assembly](src/test/Backdoor-assembly.sol) : 
   * An attacker can manipulate smart contracts as a backdoor by writing inline assembly. Any sensitive parameters can be changed at any time.
