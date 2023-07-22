@@ -126,10 +126,6 @@ contract SimpleBank is Test {
     constructor(address nftAddress) {
         token = ERC777(nftAddress);
 
-    constructor(address nftAddress) {
-        token = ERC777(nftAddress);
-
-
         // Register IERC1820Registry
         IERC1820Registry registry = IERC1820Registry(
             address(0x1820a4B7618BdE71Dce8cdc73aAB6C95905faD24)
