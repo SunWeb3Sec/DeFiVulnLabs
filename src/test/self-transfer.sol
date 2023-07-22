@@ -12,7 +12,6 @@ This oversight allows the transfer function to erroneously transfer funds to the
 Consequently, funds are lost as the code fails to deduct the transferred amount from the sender's balance.
 This vulnerability undermines the correctness of fund transfers within the contract and poses a risk 
 to the integrity of user balances.
-
  
 Mitigation:  
 Add condition to prevent transfer between same addresses
