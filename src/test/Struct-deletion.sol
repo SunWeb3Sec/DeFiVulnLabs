@@ -4,7 +4,10 @@ pragma solidity ^0.8.18;
 import "forge-std/Test.sol";
 
 /*
-Demo: Struct Deletion Oversight: Incomplete struct deletion leaves residual data. 
+Name: Struct Deletion Oversight
+
+Description:
+Incomplete struct deletion leaves residual data. 
 If you delete a struct containing a mapping, the mapping won't be deleted.
 
 The bug arises because Solidity's delete keyword does not reset the storage to its 
@@ -15,10 +18,11 @@ but the other flags in the mapping remain unchanged. Therefore,
 if the struct is deleted without deleting the mapping inside, 
 the remaining flags will persist in storage.
 
-Mitigation  
+Mitigation:  
 To fix this bug, you should delete the mapping inside the struct before deleting the struct itself.
 
 REF:
+https://twitter.com/1nf0s3cpt/status/1676836264245592065
 https://docs.soliditylang.org/en/develop/types.html
 */
 
