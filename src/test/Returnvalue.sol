@@ -5,7 +5,9 @@ import "forge-std/Test.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 /*
+Name: Unchecked return value
 
+Description:
 EIP20 standard:
 Returns a boolean value indicating whether the operation succeeded.
 function transfer(address to, uint256 amount) external returns (bool);
@@ -30,6 +32,9 @@ USDT transfer without a return value:
 
 Mitigation:
 Use OpenZeppelin’s SafeERC20 library and change transfer to safeTransfer.
+
+REF:
+https://twitter.com/1nf0s3cpt/status/1600868995007410176
 
 */
 interface USDT {
