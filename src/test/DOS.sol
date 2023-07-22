@@ -3,6 +3,21 @@ pragma solidity ^0.8.18;
 
 import "forge-std/Test.sol";
 
+/*
+Name: Denial of Service
+
+Description:
+External calls can fail accidentally or deliberately, 
+which can cause a DoS condition in the contract. For example, 
+contracts that receive Ether do not contain fallback or receive functions. (DoS with unexpected revert)
+
+Mitigation:
+A way to prevent this is to enable users to withdraw their Ether, instead of sending it to them.
+
+REF:
+https://slowmist.medium.com/intro-to-smart-contract-security-audit-dos-e23e9e901e26
+*/
+
 contract ContractTest is Test {
     KingOfEther KingOfEtherContract;
     Attack AttackerContract;
