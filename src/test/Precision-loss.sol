@@ -4,13 +4,13 @@ pragma solidity ^0.8.18;
 import "forge-std/Test.sol";
 
 /*
-Demo:
-Precision Loss - rounding down to zero
+Name: Precision Loss - rounding down to zero
 
+Description:
 Support all the ERC20 tokens, as those tokens may have different decimal places. 
 For example, USDT and USDC have 6 decimals. So, in the calculations, one must be careful.
 
-Mitigation  
+Mitigation:  
 Avoid any situation that if the numerator is smaller than the denominator, the result will be zero.
 Rounding down related issues can be avoided in many ways:
     1.Using libraries for rounding up/down as expected
@@ -19,6 +19,7 @@ Rounding down related issues can be avoided in many ways:
 
 
 REF:
+https://twitter.com/1nf0s3cpt/status/1675805135061286914
 https://github.com/sherlock-audit/2023-02-surge-judging/issues/244
 https://github.com/sherlock-audit/2023-02-surge-judging/issues/122
 https://dacian.me/precision-loss-errors#heading-rounding-down-to-zero
