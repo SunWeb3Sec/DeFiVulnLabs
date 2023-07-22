@@ -5,10 +5,23 @@ import "forge-std/Test.sol";
 import "@openzeppelin/contracts/token/ERC777/ERC777.sol";
 
 /*
-Demo: ERC777 callbacks and reentrancy  
+Name: ERC777 Reentrancy Vulnerability
+
+Description:
+ERC777 tokens allow arbitrary callbacks via hooks that are called during token transfers.
+Malicious contract addresses may cause reentrancy on such callbacks if reentrancy guards are not used. 
+
+Scenario:
 Maximum claims is 1,000 for each EOA, How can you bypass this limitation?
 
+Mitigation:
+Follow check-effect-interaction and use OpenZeppelin Reentrancy Guard.
+
+REF
+https://medium.com/cream-finance/c-r-e-a-m-finance-post-mortem-amp-exploit-6ceb20a630c5
+
 */
+
 contract ContractTest is Test {
     MyERC777 MyERC777TokenContract;
     SimpleBank SimpleBankContract;
