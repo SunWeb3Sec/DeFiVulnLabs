@@ -15,7 +15,7 @@ key:
 2.Token has a fallback function.
 For example: WETH.
 
-Mitigation  
+Mitigation:  
 Use SafeERC20's safePermit - Revert on invalid signature.
 https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/utils/SafeERC20.sol#LL89C14-L89C24
 
