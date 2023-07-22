@@ -5,10 +5,16 @@ import "forge-std/Test.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 
-// this excersise is about selfdestruct (deprecated)  and delegatecall
+/*
+Name: Uninitialized variable Vulnerability
 
-// Take Ethernaut Motorbike as example to proof the uninitialized_variables vulnerability
-// https://forum.openzeppelin.com/t/security-advisory-initialize-uups-implementation-contracts/15301
+Description:
+Uninitialized local storage variables may contain the value of other storage variables in the contract; 
+this fact can cause unintentional vulnerabilities, or be exploited deliberately.
+
+REF:
+https://blog.dixitaditya.com/ethernaut-level-25-motorbike
+*/
 
 contract ContractTest is Test {
     Engine EngineContract;
