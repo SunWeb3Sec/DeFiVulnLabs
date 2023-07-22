@@ -3,6 +3,23 @@ pragma solidity ^0.8.18;
 
 import "forge-std/Test.sol";
 
+/*
+Name: Storage Collision Vulnerability
+
+Description:
+The vulnerability is that both the Proxy and Logic contracts use the same storage slot (slot 0) to store important variables,
+namely the implementation address in the Proxy contract and the GuestAddress in the Logic contract. 
+Since the Proxy contract is using the delegatecall method to interact with the Logic contract, 
+they share the same storage. If the foo function is called,
+it overwrites the implementation address in the Proxy contract, which results in an unexpected behavior.
+
+Mitigation:
+One approach to mitigating this issue is to design the storage layout of the proxy and logic contracts to be consistent with each other.
+
+REF:
+https://blog.openzeppelin.com/proxy-patterns
+*/
+
 contract ContractTest is Test {
     Logic LogicContract;
     Proxy ProxyContract;
