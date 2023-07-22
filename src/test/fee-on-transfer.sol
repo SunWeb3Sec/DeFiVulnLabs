@@ -4,7 +4,6 @@ pragma solidity ^0.8.18;
 import "forge-std/Test.sol";
 
 /*
-
 Name: STA token had a deflationary model with transfer fee of 1% charged from a recipient.
 
 Description:
