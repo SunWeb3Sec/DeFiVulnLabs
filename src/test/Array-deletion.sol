@@ -4,18 +4,20 @@ pragma solidity ^0.8.18;
 import "forge-std/Test.sol";
 
 /*
-Demo: Array Deletion Oversight: leading to data inconsistency
- 
+Name: Array Deletion Oversight: leading to data inconsistency
+
+Description:
 In Solidity where improper deletion of elements from dynamic arrays can result in data inconsistency. 
 When attempting to delete elements from an array, if the deletion process is not handled correctly, 
 the array may still retain storage space and exhibit unexpected behavior. 
 
 
-Mitigation  
+Mitigation:  
 Option1: By copying the last element and placing it in the position to be removed.
 Option2: By shifting them from right to left.
 
 REF:
+https://twitter.com/1nf0s3cpt/status/1677167550277509120
 https://blog.solidityscan.com/improper-array-deletion-82672eed8e8d
 https://github.com/sherlock-audit/2023-03-teller-judging/issues/88
 */
