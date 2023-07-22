@@ -4,6 +4,13 @@ pragma solidity ^0.8.18;
 import "forge-std/Test.sol";
 
 /*
+Name: Predictable Randomness Vulnerability
+
+Description:
+Use of global variables like block hash, block number, 
+block timestamp and other fields is insecure, miner and attacker can control it.
+
+Scenario:
 GuessTheRandomNumber is a game where you win 1 Ether if you can guess the
 pseudo random number generated from block hash and timestamp.
 
@@ -16,6 +23,13 @@ But let's see how easy it is win.
 
 What happened?
 Attack computed the correct answer by simply copying the code that computes the random number.
+
+Mitigation:
+Don't use blockhash and block.timestamp as source of randomness
+
+REF:
+https://solidity-by-example.org/hacks/randomness/
+ 
 */
 
 contract ContractTest is Test {
