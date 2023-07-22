@@ -25,7 +25,6 @@ If the delegatecall is necessary for the contract's functionality, make sure to 
 sanitize inputs to avoid unexpected behaviors.
 */
  
-
 contract Proxy {
     address public owner = address(0xdeadbeef); // slot0
     Delegate delegate;
