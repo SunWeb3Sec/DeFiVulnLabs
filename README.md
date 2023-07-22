@@ -36,7 +36,7 @@ Currently supports 47 types of vulnerabilities. it compiles with Solidity 0.8.18
   * Because the storage of each smart contract is public and transparent, and the content can be read through the corresponding slot in the specified contract address. Sensitive information is not recommended to be placed in smart contract programs.
 * [Unprotected callback - ERC721 SafeMint reentrancy](src/test/Unprotected-callback.sol) : 
   * _safeMint is secure? Attacker can reenter the mint function inside the onERC721Received callback.
-* [Backdoor assembly](src/test/Backdoor-assembly.sol) : 
+* [Hidden Backdoor in Contract](src/test/Backdoor-assembly.sol) : 
   * An attacker can manipulate smart contracts as a backdoor by writing inline assembly. Any sensitive parameters can be changed at any time.
 * [Bypass iscontract](src/test/Bypasscontract.sol) : 
   * The attacker only needs to write the code in the constructor of the smart contract to bypass the detection mechanism of whether it is a smart contract.
