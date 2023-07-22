@@ -12,6 +12,7 @@ allows an attacker to manipulate the owner of the Proxy contract, which is hardc
 The vulnerability arises due to the use of delegatecall in the fallback function of the Proxy contract. 
 delegatecall allows an attacker to invoke the pwn() function from the Delegate contract within the context 
 of the Proxy contract, thereby changing the value of the owner state variable of the Proxy contract.
+This allows a smart contract to dynamically load code from a different address at runtime.
 
 Scenario:
 Proxy Contract is designed for helping users call logic contract
