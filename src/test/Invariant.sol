@@ -6,6 +6,11 @@ import "forge-std/Test.sol";
 
 /*
 Name: Invariant issue
+
+Description:
+Assert is used to check invariants. Those are states our contract or variables should never reach, ever. For example,
+if we decrease a value then it should never get bigger, only smaller.
+
 In the given code, the Invariant contract contains a receiveMoney function that accepts Ether and 
 increments the sender's balance with the amount received. This balance is stored as an uint64.
 Unsigned integers can store values from 0 to 2^n - 1, so in this case 2^64 - 1, or roughly 18.4467 Ether.
