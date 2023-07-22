@@ -6,14 +6,17 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /*
+Name: Price manipulation
 
-Demo:
-Price manipulation: Incorrect price calculation over balanceOf(), getReserves, etc.
+Description:
+Incorrect price calculation over balanceOf, getReverse may refer to a situation 
+where the price of a token or asset is not accurately calculated based on the balanceOf function.
 
-Mitigation  
+Mitigation:  
 Use a manipulation resistant oracle, chainlink, TWAP, etc.
 
 REF:
+https://twitter.com/1nf0s3cpt/status/1673948842738487296
 https://github.com/SunWeb3Sec/DeFiHackLabs/tree/main/past/2022#20221012-atk---flashloan-manipulate-price
 https://github.com/SunWeb3Sec/DeFiHackLabs/tree/main/past/2022#20220807-egd-finance---flashloans--price-manipulation
 https://github.com/SunWeb3Sec/DeFiHackLabs/tree/main/past/2022#20220428-deus-dao---flashloan--price-oracle-manipulation

@@ -1,7 +1,26 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
 
-// this excersise is about  a low level call to a contract where input and return values are not checked
+/*
+Name: Unsafe Call Vulnerability
+
+Description:
+In TokenWhale contract's approveAndCallcode function. The vulnerability allows an 
+arbitrary call to be executed with arbitrary data, leading to potential security risks
+and unintended consequences. The function uses a low-level call (_spender.call(_extraData))
+to execute code from the _spender address without any validation or checks on the provided _extraData.
+This can lead to unexpected behavior, reentrancy attacks, or unauthorized operations.
+
+This excersise is about  a low level call to a contract where input and return values are not checked
+If the call data is controllable, it is easy to cause arbitrary function execution.
+
+Mitigation:
+Use of low level "call" should be avoided whenever possible.  
+
+REF
+https://blog.li.fi/20th-march-the-exploit-e9e1c5c03eb9
+*/
+
 import "forge-std/Test.sol";
 
 contract ContractTest is Test {

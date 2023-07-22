@@ -4,9 +4,19 @@ pragma solidity ^0.7.6;
 
 import "forge-std/Test.sol";
 
-// This contract is designed to act as a time vault.
-// User can deposit into this contract but cannot withdraw for atleast a week.
-// User can also extend the wait time beyond the 1 week waiting period.
+/*
+Name: Integrate Overflow   
+
+Description:
+The TimeLock vulnerability is a flaw in the smart contract code that allows 
+an attacker to prematurely withdraw their deposited funds from the TimeLock contract. 
+The vulnerability arises due to an overflow in the increaseLockTime function, 
+which manipulates the lock time in a way that causes it to wrap around to 0, 
+enabling the attacker to withdraw their funds before the actual waiting period expires.
+
+This contract is designed to act as a time vault.
+User can deposit into this contract but cannot withdraw for atleast a week.
+User can also extend the wait time beyond the 1 week waiting period.
 
 /*
 1. Alice and bob both have 1 Ether balance
@@ -19,6 +29,11 @@ import "forge-std/Test.sol";
 What happened?
 Attack caused the TimeLock.lockTime to overflow,
 and was able to withdraw before the 1 week waiting period.
+
+Impact: Solidity < 0.8 and without SafeMath 
+
+Mitigation:
+To mitigate the Overflow vulnerability, use SafeMath library or use Solidity > 0.8
 */
 
 contract TimeLock {

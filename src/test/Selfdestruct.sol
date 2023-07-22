@@ -4,15 +4,30 @@ pragma solidity ^0.8.18;
 import "forge-std/Test.sol";
 
 /*
+Name: Self-Destruct Vulnerability
+
+Description:
+The EtherGame Self-Destruct Vulnerability is a flaw in the smart contract code that allows an attacker 
+to disrupt the game by causing the EtherGame contract to self-destruct (using the selfdestruct opcode). 
+The vulnerability arises due to the dos function in the Attack contract, which performs a self-destruct
+operation on the EtherGame contract after receiving a significant amount of Ether. As a result of the self-destruct, 
+the EtherGame contract's functionality is permanently disabled, making it impossible for anyone to deposit or claim the winner's reward.
+
+Scenario:
 1. Deploy EtherGame
 2. Players (say Alice and Bob) decides to play, deposits 1 Ether each.
 2. Deploy Attack with address of EtherGame
-3. Call Attack.attack sending 5 ether. This will break the game
-   No one can become the winner.
+3. Call Attack.attack sending 5 ether. This will break the game No one can become the winner.
 
 What happened?
 Attack forced the balance of EtherGame to equal 7 ether.
 Now no one can deposit and the winner cannot be set.
+Due to missing or insufficient access controls, malicious parties can self-destruct the contract.
+The selfdestruct(address) function removes all bytecode from the contract address and sends all ether stored to the specified address.
+
+Mitigation:
+Instead of relying on this.balance to track the deposited Ether, 
+use a state variable to keep track of the total deposited amount.
 */
 
 contract EtherGame {

@@ -3,6 +3,27 @@ pragma solidity ^0.8.18;
 
 import "forge-std/Test.sol";
 
+/*
+Name: Signature Replay Vulnerability
+
+Description:
+In this scenario, Alice signs a transaction that allows Bob to transfer tokens from Alice's account 
+to Bob's account. Bob then replays this signature on multiple contracts 
+(in this case, the TokenWhale and SixEyeToken contracts), each time authorizing the transfer of tokens 
+from Alice's account to his. This is possible because the contracts use the same methodology for signing
+and validating transactions, but they do not share a nonce to prevent replay attacks.
+
+Missing protection against signature replay attacks, Same signature can be used multiple times to execute a function.
+
+Mitigation:
+Replay attacks can be prevented by implementing a nonce, a number that is only used once, into the signing and verification process. 
+
+REF:
+https://medium.com/cryptronics/signature-replay-vulnerabilities-in-smart-contracts-3b6f7596df57
+https://medium.com/cypher-core/replay-attack-vulnerability-in-ethereum-smart-contracts-introduced-by-transferproxy-124bf3694e25
+
+*/
+
 contract ContractTest is Test {
     TokenWhale TokenWhaleContract;
     SixEyeToken SixEyeTokenContract;

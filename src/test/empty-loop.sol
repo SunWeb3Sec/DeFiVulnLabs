@@ -5,14 +5,17 @@ import "forge-std/Test.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 /*
+Name: Empty loop issue
 
-Empty loop: Due to insufficient validation, an attacker can simply pass an empty array to bypass the loop and signature verification.
+Description:
+Due to insufficient validation, an attacker can simply pass an empty array to bypass the loop and signature verification.
 
-Mitigation  
+Mitigation:  
 Check the number of signatures  
 require(sigs.length > 0, "No signatures provided");
 
-REF
+REF:
+https://twitter.com/1nf0s3cpt/status/1673195574215213057
 https://twitter.com/akshaysrivastv/status/1648310441058115592
 https://dacian.me/exploiting-developer-assumptions#heading-unexpected-empty-inputs
 */

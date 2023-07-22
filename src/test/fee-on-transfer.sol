@@ -4,15 +4,20 @@ pragma solidity ^0.8.18;
 import "forge-std/Test.sol";
 
 /*
+Name: STA token had a deflationary model with transfer fee of 1% charged from a recipient.
 
-Demo:
-STA token had a deflationary model with transfer fee of 1% charged from a recipient.
+Description:
+The actual deposited amount might be lower than the specified depositAmount of the function parameter.
 
 VulnVault: Incompatability with deflationary / fee-on-transfer tokens
 
-Mitigation  
+Mitigation:  
 Transfer the tokens first and compare pre-/after token balances to compute the actual deposited amount.
 
+REF:
+https://twitter.com/1nf0s3cpt/status/1671084918506684418
+https://medium.com/1inch-network/balancer-hack-2020-a8f7131c980e
+https://twitter.com/BlockSecTeam/status/1600442137811689473
 */
 
 contract ContractTest is Test {

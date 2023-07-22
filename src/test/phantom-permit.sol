@@ -5,17 +5,22 @@ import "forge-std/Test.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 /*
+Name: Phantom function - Permit Function 
 
+Description:
 Phantom function: Accepts any call to a function that it doesn't actually define, without reverting.
 key:
 1.Token that does not support EIP-2612 permit. 
 2.Token has a fallback function.
 For example: WETH.
 
-Mitigation  
+Mitigation:  
 Use SafeERC20's safePermit - Revert on invalid signature.
 https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/utils/SafeERC20.sol#LL89C14-L89C24
 
+REF:
+https://twitter.com/1nf0s3cpt/status/1671347058568237057
+https://media.dedaub.com/phantom-functions-and-the-billion-dollar-no-op-c56f062ae49f
 */
 
 contract ContractTest is Test {
