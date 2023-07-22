@@ -4,8 +4,28 @@ pragma solidity ^0.8.18;
 import "forge-std/Test.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 
-// this excersise is about a contract that via callback function to mint more NFTs
-// please note its just possible to use multipe EOA to mint more NFTs
+/*
+Name: Unprotected callback - ERC721 SafeMint reentrancy
+
+Description:
+The contract ContractTest is exploiting a callback feature to bypass the maximum mint limit 
+set by the MaxMint721 contract. This is achieved by triggering the onERC721Received function,
+which internally calls the mint function again. Therefore, although MaxMint721 attempts 
+to limit the number of tokens that a user can mint to MAX_PER_USER, the ContractTest contract 
+successfully mints more tokens than this limit. 
+
+Scenario:
+This excersise is about a contract that via callback function to mint more NFTs
+
+Mitigation:
+Follow check-effect-interaction and use OpenZeppelin Reentrancy Guard.
+
+REF
+https://blocksecteam.medium.com/when-safemint-becomes-unsafe-lessons-from-the-hypebears-security-incident-2965209bda2a
+https://www.paradigm.xyz/2021/08/the-dangers-of-surprising-code
+
+*/
+
 contract ContractTest is Test {
     MaxMint721 MaxMint721Contract;
     bool complete;
