@@ -7,8 +7,9 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 /*
-Demo:Missing flash loan initiator check
- 
+Name: Missing flash loan initiator check
+
+Description:
 Missing flash loan initiator check refers to a potential security vulnerability in a flash loan implementation 
 where the initiator of the flash loan is not properly verified or checked, anyone could exploit the flash loan 
 functionality and set the receiver address to a vulnerable protocol.
@@ -17,10 +18,11 @@ By doing so, an attacker could potentially manipulate balances, open trades, dra
 or carry out other malicious actions within the vulnerable protocol. 
 This poses significant risks to the security and integrity of the protocol and its users.
 
-Mitigation  
+Mitigation:  
 Check the initiator of the flash loan and revert if the initiator is not authorized.
 
 REF:
+https://twitter.com/ret2basic/status/1681150722434551809
 https://github.com/sherlock-audit/2023-05-dodo-judging/issues/34
 */
 
