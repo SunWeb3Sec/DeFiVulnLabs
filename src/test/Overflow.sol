@@ -77,7 +77,7 @@ contract ContractTest is Test {
         vm.deal(bob, 1 ether);
     }
 
-    function testFailOverflow() public {
+    function testOverflow() public {
         console.log("Alice balance", alice.balance);
         console.log("Bob balance", bob.balance);
 

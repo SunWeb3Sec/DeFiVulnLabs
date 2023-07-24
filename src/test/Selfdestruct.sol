@@ -67,7 +67,7 @@ contract ContractTest is Test {
         vm.deal(address(eve), 1 ether);
     }
 
-    function testFailSelfdestruct() public {
+    function testSelfdestruct() public {
         console.log("Alice balance", alice.balance);
         console.log("Eve balance", eve.balance);
 
