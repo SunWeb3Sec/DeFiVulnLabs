@@ -28,7 +28,7 @@ Looks like theres is no setwinner function in contract, how admin can rug?
 contract ContractTest is Test {
     LotteryGame LotteryGameContract;
 
-    function testUnsafeCall() public {
+    function testBackdoorCall() public {
         address alice = vm.addr(1);
         address bob = vm.addr(2);
         LotteryGameContract = new LotteryGame();
