@@ -28,7 +28,7 @@ contract ContractTest is Test {
         SimpleBankContract = new SimpleBank();
     }
 
-    function testPrice_Manipulation() public {
+    function testecRecover() public {
         emit log_named_decimal_uint(
             "Before exploiting, my balance",
             SimpleBankContract.getBalance(address(this)),
