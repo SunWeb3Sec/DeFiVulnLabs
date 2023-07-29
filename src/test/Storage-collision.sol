@@ -34,7 +34,7 @@ contract ContractTest is Test {
         );
         ProxyContract.testcollision();
         console.log(
-            "Overwrited slot0 implementation contract address:",
+            "overwritten slot0 implementation contract address:",
             ProxyContract.implementation()
         );
         console.log("Exploit completed");
