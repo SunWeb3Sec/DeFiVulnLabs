@@ -23,7 +23,7 @@ contract ContractTest is Test {
     address alice = vm.addr(1);
     address eve = vm.addr(2);
 
-    function testSafeMint() public {
+    function testUninitialized() public {
         EngineContract = new Engine();
         MotorbikeContract = new Motorbike(address(EngineContract));
         AttackContract = new Attack();
