@@ -38,7 +38,7 @@ contract ContractTest is Test {
         HashCollisionBugContract = new HashCollisionBug();
     }
 
-    function testRounding_error() public {
+    function testHash_collisions() public {
         emit log_named_bytes32(
             "(AAA,BBB) Hash",
             HashCollisionBugContract.createHash("AAA", "BBB")
