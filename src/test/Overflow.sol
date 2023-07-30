@@ -8,7 +8,7 @@ import "forge-std/Test.sol";
 Name: Integrate Overflow   
 
 Description:
-The TimeLock vulnerability is a flaw in the smart contract code that allows 
+The TimeLock has a flaw in the smart contract code that allows 
 an attacker to prematurely withdraw their deposited funds from the TimeLock contract. 
 The vulnerability arises due to an overflow in the increaseLockTime function, 
 which manipulates the lock time in a way that causes it to wrap around to 0, 
