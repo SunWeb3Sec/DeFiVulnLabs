@@ -6,7 +6,7 @@ Currently supports 47 types of vulnerabilities. it compiles with Solidity 0.8.18
 **Disclaimer:** This content serves solely as a proof of concept showcasing Solidity common bugs. It is strictly intended for educational purposes and should not be interpreted as encouraging or endorsing any form of illegal activities or actual hacking attempts. The provided information is for informational and learning purposes only, and any actions taken based on this content are solely the responsibility of the individual. The usage of this information should adhere to applicable laws, regulations, and ethical standards.
 
 ## DeFiVulnLabs Solidity Security Testing Guide
-* Notion
+* [Notion](https://web3sec.notion.site/b201fe69f84e4050bf3915c6030f0fdf)
   
 ## Getting Started
 
