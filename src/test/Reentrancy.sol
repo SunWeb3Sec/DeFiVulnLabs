@@ -63,9 +63,9 @@ contract EtherStoreRemediated {
 
     function withdrawFunds(uint256 _weiToWithdraw) public nonReentrant {
         require(balances[msg.sender] >= _weiToWithdraw);
+        balances[msg.sender] -= _weiToWithdraw;
         (bool send, ) = msg.sender.call{value: _weiToWithdraw}("");
         require(send, "send failed");
-        balances[msg.sender] -= _weiToWithdraw;
     }
 }
 
