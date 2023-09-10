@@ -7,6 +7,8 @@ import "forge-std/Test.sol";
     WTF Solidity 合约安全: S01. 重入攻击
 
     ref https://www.wtf.academy/solidity-104/ReentrancyAttack/
+
+    command `forge test -vvv --contracts ./src/wtf/S01ReentrancyAttack.sol`
  */
 contract Bank {
     mapping(address => uint256) public balanceOf; // 余额mapping
