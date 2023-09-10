@@ -72,11 +72,11 @@ contract ContractTest is Test {
     function testReentrancy() public {
         address alice = vm.addr(1);
         address bob = vm.addr(2);
-        vm.prank(alice);
+        
         bank = new Bank();
         bank.deposit{value: 20 ether}();
         assertEq(bank.getBalance(), 20 ether);
-        vm.prank(bob);
+
         attack = new Attack(bank);
         attack.attack{value: 1 ether}();
         assertEq(bank.getBalance(), 0);
