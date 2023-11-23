@@ -60,7 +60,7 @@ contract ContractTest is Test {
         console.log("Start price manipulation");
         console.log("Borrow 500 USBa over floashloan");
         // Let's manipulate the price since the getPrice is over the balanceOf.
-        // Use flashloan to borrow 500 USDb
+        // Use flashloan to borrow 500 USDa
         SimplePoolContract.flashLoan(500 ether, address(this), "0x0");
     }
 
