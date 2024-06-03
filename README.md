@@ -15,7 +15,7 @@ Currently supports 47 types of vulnerabilities. it compiles with Solidity 0.8.18
 * Test vulnerability: ```forge test --contracts ./src/test/Reentrancy.sol -vvvv``` 
 
 ## Who Support Us? DeFiHackLabs Received Grant From
-[![gcc PM](https://github.com/SunWeb3Sec/DeFiHackLabs/assets/107249780/84fb64ac-1d2b-45ba-b864-b744bbbfdb30)](https://gccofficial.org/grants.html)
+[![gcc PM](https://github.com/SunWeb3Sec/DeFiHackLabs/assets/107249780/84fb64ac-1d2b-45ba-b864-b744bbbfdb30)](https://x.com/GCCofCommons)
 
 ## Donate us
 
