@@ -22,7 +22,8 @@ Currently supports 47 types of vulnerabilities. it compiles with Solidity 0.8.18
 If you appreciate our work, please consider donating. Even a small amount helps us continue developing and improving our projects, and promoting web3 security.
 
 - EVM Chains - 0xD7d6215b4EF4b9B5f40baea48F41047Eb67a11D5
-
+- [Giveth](https://giveth.io/donate/defihacklabs)
+  
 ## List of vulnerabilities
 * [Integer Overflow 1](src/test/Overflow.sol) | [Integer Overflow 2](src/test/Overflow2.sol) : 
   * In previous versions of Solidity (prior Solidity 0.8.x) an integer would automatically roll-over to a lower or higher number.
