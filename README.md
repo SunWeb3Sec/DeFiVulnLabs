@@ -14,6 +14,16 @@ Currently supports 47 types of vulnerabilities. it compiles with Solidity 0.8.18
 * Clone and install dependencies:```git submodule update --init --recursive```
 * Test vulnerability: ```forge test --contracts ./src/test/Reentrancy.sol -vvvv``` 
 
+## Who Support Us? DeFiHackLabs Received Grant From
+[![gcc PM](https://github.com/SunWeb3Sec/DeFiHackLabs/assets/107249780/84fb64ac-1d2b-45ba-b864-b744bbbfdb30)](https://x.com/GCCofCommons)
+
+## Donate us
+
+If you appreciate our work, please consider donating. Even a small amount helps us continue developing and improving our projects, and promoting web3 security.
+
+- EVM Chains - 0xD7d6215b4EF4b9B5f40baea48F41047Eb67a11D5
+- [Giveth](https://giveth.io/donate/defihacklabs)
+  
 ## List of vulnerabilities
 * [Integer Overflow 1](src/test/Overflow.sol) | [Integer Overflow 2](src/test/Overflow2.sol) : 
   * In previous versions of Solidity (prior Solidity 0.8.x) an integer would automatically roll-over to a lower or higher number.
