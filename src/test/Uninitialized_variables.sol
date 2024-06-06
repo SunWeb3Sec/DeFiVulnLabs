@@ -20,8 +20,6 @@ contract ContractTest is Test {
     Engine EngineContract;
     Motorbike MotorbikeContract;
     Attack AttackContract;
-    address alice = vm.addr(1);
-    address eve = vm.addr(2);
 
     function testUninitialized() public {
         EngineContract = new Engine();
