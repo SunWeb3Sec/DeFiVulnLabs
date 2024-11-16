@@ -4,6 +4,39 @@ pragma solidity ^0.7.6;
 
 import "forge-std/Test.sol";
 
+/*
+Name: Token Whale Overflow Vulnerability
+
+Description:
+This contract demonstrates an integer underflow vulnerability in an ERC20 token contract. 
+The vulnerability exists in the implementation of the transferFrom function. Due to the lack 
+of automatic overflow checking in Solidity versions before 0.8.0, attackers can exploit 
+this vulnerability to generate a large amount of tokens.
+
+How it works:
+1. Contract initializes with deployer receiving 1000 tokens
+2. Deployer transfers 800 tokens to Alice
+3. Alice approves the attacker to spend 1000 tokens
+4. Attacker uses transferFrom to transfer 500 tokens from Alice to Bob
+5. Due to the lack of overflow checking in the _transfer function's subtraction operation, 
+   an underflow occurs when Alice's balance is insufficient
+6. The underflow causes Alice's balance to become an extremely large number, 
+   effectively creating tokens out of thin air
+
+Impact: 
+- Affects contracts using Solidity < 0.8.0
+- Contracts not using SafeMath library
+
+Mitigation:
+1. Use Solidity 0.8.0 or later which has built-in overflow checking
+2. Use SafeMath library for older versions
+3. Properly validate balances before transfers
+
+This vulnerability demonstrates why proper integer overflow/underflow protection is crucial 
+in smart contract development, particularly in token contracts where numerical operations 
+are frequent and critical to the contract's security.
+*/
+
 contract ContractTest is Test {
     TokenWhaleChallenge TokenWhaleChallengeContract;
 
