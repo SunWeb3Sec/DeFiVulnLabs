@@ -14,7 +14,7 @@ contract ContractTest is Test {
 
     function testselfdestruct2() public {
         ForceContract = new Force();
-        console.log("Balance of ForceContract:", address(this).balance);
+        console.log("Balance of ForceContract:", address(ForceContract).balance);
         AttackerContract = new Attack();
         console.log(
             "Balance of ForceContract:",
