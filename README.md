@@ -1,7 +1,7 @@
 # DeFiVulnLabs
 This was an internal Web3 solidity security training in [XREX](https://xrex.io/). I want to share these materials with everyone interested in Web3 security and how to find vulnerabilities in code and exploit them. Every vulnerability testing uses Foundry. Faster and easier!
 
-Currently supports 47 types of vulnerabilities. it compiles with Solidity 0.8.18 except the cases like overflow, underflow where we need older solidity to reproduce the bug.
+Currently supports 48 types of vulnerabilities. it compiles with Solidity 0.8.18 except the cases like overflow, underflow where we need older solidity to reproduce the bug.
 
 **Disclaimer:** This content serves solely as a proof of concept showcasing Solidity common bugs. It is strictly intended for educational purposes and should not be interpreted as encouraging or endorsing any form of illegal activities or actual hacking attempts. The provided information is for informational and learning purposes only, and any actions taken based on this content are solely the responsibility of the individual. The usage of this information should adhere to applicable laws, regulations, and ethical standards.
 
