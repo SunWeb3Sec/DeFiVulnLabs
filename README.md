@@ -131,6 +131,8 @@ If you appreciate our work, please consider donating. Even a small amount helps 
   * Missing flash loan initiator check refers to a potential security vulnerability in a flash loan implementation. [REF](https://twitter.com/1nf0s3cpt/status/1681148319551340545)
 * [Incorrect sanity checks - Multiple Unlocks Before Lock Time Elapse](src/test/Incorrect_sanity_checks.sol) : 
   * This allows tokens to be unlocked multiple times before the lock period has elapsed, potentially leading to significant financial loss. [REF](https://twitter.com/1nf0s3cpt/status/1681492477281468420)
+* [Transient Storage Misuse](src/test/TransientStorageMisuse.t.sol) : 
+  * Transient storage (introduced in Solidity 0.8.24 with the Cancun network upgrade via EIP-1153) can be manipulated during callback functions, allowing attackers to bypass access controls by injecting arbitrary values. [REF](https://www.coveragelabs.io/blog/post/sir-exploit)
           
 ## Bug Reproduce
 ### 20220714 Sherlock Yield Strategy Bug - Cross-protocol Reentrancy
