@@ -90,7 +90,7 @@ contract ContractTest is Test {
         attack.Attack();
     }
 
-    function testFailRemediated() public {
+    function test_RevertRemediated() public {
         attackRemediated.Attack();
     }
 }
