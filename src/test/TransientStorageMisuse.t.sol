@@ -52,7 +52,6 @@ contract SimpleVault {
 
 contract TransientStorageMisuseTest is Test {
     SimpleVault vault;
-
     
     function setUp() public {
         vault = new SimpleVault();
@@ -70,6 +69,6 @@ contract TransientStorageMisuseTest is Test {
         // Now use this amount in the mint function
         vault.mint(amount);
         // Exploit callback
-       vault.SwapCallback(0, "");
+        vault.SwapCallback(0, "");
     }
 }
